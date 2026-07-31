@@ -253,11 +253,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         behavior: 'smooth'
                     });
 
-                    visibleEl.style.setProperty('border', '3px solid #00C6B2', 'important');
-                    visibleEl.style.setProperty('box-shadow', '0 0 0 5px rgba(0,198,178,0.35)', 'important');
+                    visibleEl.style.setProperty('border-color', '#00C6B2', 'important');
+                    visibleEl.style.setProperty('box-shadow', '0 8px 32px -8px rgba(0,0,0,0.1)', 'important');
+                    visibleEl.style.setProperty('transform', 'translateY(-4px)', 'important');
                     setTimeout(() => {
-                        visibleEl.style.removeProperty('border');
+                        visibleEl.style.removeProperty('border-color');
                         visibleEl.style.removeProperty('box-shadow');
+                        visibleEl.style.removeProperty('transform');
                     }, 4000);
                 } else {
                     target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
