@@ -77,6 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         ssTrack.addEventListener('mouseenter', () => { ssPaused = true; });
         ssTrack.addEventListener('mouseleave', () => { ssPaused = false; });
+        ssTrack.addEventListener('touchstart', () => { ssPauseUntil = Date.now() + 5000; }, { passive: true });
+        ssTrack.addEventListener('touchmove', () => { ssPauseUntil = Date.now() + 5000; }, { passive: true });
     }
 
     /* =============================================
