@@ -68,21 +68,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Pure layout math (offsetLeft is transform-independent), so this
             // is immune to any CSS transition currently in flight.
+            // Only an ssOffset within [0, ssSetWidth] is guaranteed to have real
+            // card content covering the whole viewport (the track only holds one
+            // extra clone set). Picking a candidate whose raw target falls outside
+            // that range would center it over blank space instead.
             let best = null;
             let bestOffset = 0;
             let bestDist = Infinity;
             candidates.forEach(el => {
                 const elCenter = el.offsetLeft + el.offsetWidth / 2;
-                // candidate new ssOffset so this element lands centered
-                let candidateOffset = elCenter - viewportCenterLocal;
-                candidateOffset = ((candidateOffset % ssSetWidth) + ssSetWidth) % ssSetWidth;
-                // distance this candidate would have to travel from current ssOffset
-                let travel = Math.abs(candidateOffset - ssOffset);
-                travel = Math.min(travel, ssSetWidth - travel);
+                const rawOffset = elCenter - viewportCenterLocal;
+                if (rawOffset < 0 || rawOffset > ssSetWidth) return; // would show blank space
+                const travel = Math.abs(rawOffset - ssOffset);
                 if (travel < bestDist) {
                     bestDist = travel;
                     best = el;
-                    bestOffset = candidateOffset;
+                    bestOffset = rawOffset;
                 }
             });
             if (!best) return null;
