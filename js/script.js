@@ -63,34 +63,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
         ssJumpTo = (id) => {
             const candidates = ssTrack.querySelectorAll(`#${id}, [data-clone-of="${id}"]`);
-            const viewport = ssTrack.parentElement;
-            const viewportRect = viewport.getBoundingClientRect();
-            const viewportCenter = viewportRect.left + viewportRect.width / 2;
+            const viewportWidth = ssTrack.parentElement.getBoundingClientRect().width;
+            const viewportCenterLocal = viewportWidth / 2;
 
-            let closest = null;
-            let closestDist = Infinity;
+            // Pure layout math (offsetLeft is transform-independent), so this
+            // is immune to any CSS transition currently in flight.
+            let best = null;
+            let bestOffset = 0;
+            let bestDist = Infinity;
             candidates.forEach(el => {
-                const rect = el.getBoundingClientRect();
-                const center = rect.left + rect.width / 2;
-                const dist = Math.abs(center - viewportCenter);
-                if (dist < closestDist) {
-                    closestDist = dist;
-                    closest = el;
+                const elCenter = el.offsetLeft + el.offsetWidth / 2;
+                // candidate new ssOffset so this element lands centered
+                let candidateOffset = elCenter - viewportCenterLocal;
+                candidateOffset = ((candidateOffset % ssSetWidth) + ssSetWidth) % ssSetWidth;
+                // distance this candidate would have to travel from current ssOffset
+                let travel = Math.abs(candidateOffset - ssOffset);
+                travel = Math.min(travel, ssSetWidth - travel);
+                if (travel < bestDist) {
+                    bestDist = travel;
+                    best = el;
+                    bestOffset = candidateOffset;
                 }
             });
-            if (!closest) return null;
+            if (!best) return null;
 
-            const targetRect = closest.getBoundingClientRect();
-            const currentCenter = targetRect.left + targetRect.width / 2;
-            ssOffset += (currentCenter - viewportCenter);
-            if (ssOffset >= ssSetWidth) ssOffset -= ssSetWidth;
-            if (ssOffset < 0) ssOffset += ssSetWidth;
+            ssOffset = bestOffset;
             ssTrack.style.transition = 'none';
             ssTrack.offsetHeight; // force reflow so the transition below actually animates
             ssTrack.style.transition = 'transform 0.6s ease';
             ssApply();
             setTimeout(() => { ssTrack.style.transition = ''; }, 650);
-            return closest;
+            return best;
         };
 
         function ssTick() {
@@ -121,7 +124,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         ssTrack.addEventListener('mouseenter', () => { ssPaused = true; });
         ssTrack.addEventListener('mouseleave', () => { ssPaused = false; });
-        ssTrack.addEventListener('touchstart', () => { ssPauseUntil = Date.now() + 5000; }, { passive: true });
+
+        /* Manual drag / swipe — takes priority over the auto-slide */
+        let ssDragging = false;
+        let ssDragStartX = 0;
+        let ssDragStartOffset = 0;
+
+        const ssDragStart = (clientX) => {
+            ssDragging = true;
+            ssDragStartX = clientX;
+            ssDragStartOffset = ssOffset;
+            ssPauseUntil = Date.now() + 5000;
+            ssTrack.style.transition = 'none';
+        };
+        const ssDragMove = (clientX) => {
+            if (!ssDragging) return;
+            let next = ssDragStartOffset - (clientX - ssDragStartX);
+            next = ((next % ssSetWidth) + ssSetWidth) % ssSetWidth;
+            ssOffset = next;
+            ssApply();
+        };
+        const ssDragEnd = () => {
+            if (!ssDragging) return;
+            ssDragging = false;
+            ssTrack.style.transition = '';
+            ssPauseUntil = Date.now() + 5000;
+        };
+
+        ssTrack.addEventListener('touchstart', e => ssDragStart(e.touches[0].clientX), { passive: true });
+        ssTrack.addEventListener('touchmove', e => ssDragMove(e.touches[0].clientX), { passive: true });
+        ssTrack.addEventListener('touchend', ssDragEnd);
+
+        ssTrack.addEventListener('mousedown', e => { e.preventDefault(); ssDragStart(e.clientX); });
+        window.addEventListener('mousemove', e => ssDragMove(e.clientX));
+        window.addEventListener('mouseup', ssDragEnd);
     }
 
     /* =============================================
