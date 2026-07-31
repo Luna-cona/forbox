@@ -128,18 +128,31 @@ document.addEventListener('DOMContentLoaded', () => {
         /* Manual drag / swipe — takes priority over the auto-slide */
         let ssDragging = false;
         let ssDragStartX = 0;
+        let ssDragStartY = 0;
         let ssDragStartOffset = 0;
+        let ssDragIsHorizontal = null;
 
-        const ssDragStart = (clientX) => {
+        const ssDragStart = (clientX, clientY) => {
             ssDragging = true;
             ssDragStartX = clientX;
+            ssDragStartY = clientY;
             ssDragStartOffset = ssOffset;
-            ssPauseUntil = Date.now() + 5000;
+            ssDragIsHorizontal = null;
             ssTrack.style.transition = 'none';
         };
-        const ssDragMove = (clientX) => {
+        const ssDragMove = (clientX, clientY, e) => {
             if (!ssDragging) return;
-            let next = ssDragStartOffset - (clientX - ssDragStartX);
+            const dx = clientX - ssDragStartX;
+            const dy = clientY - ssDragStartY;
+
+            if (ssDragIsHorizontal === null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
+                ssDragIsHorizontal = Math.abs(dx) > Math.abs(dy);
+                if (ssDragIsHorizontal) ssPauseUntil = Date.now() + 5000;
+            }
+            if (!ssDragIsHorizontal) return; // let the page scroll vertically instead
+
+            if (e && e.cancelable) e.preventDefault();
+            let next = ssDragStartOffset - dx;
             next = ((next % ssSetWidth) + ssSetWidth) % ssSetWidth;
             ssOffset = next;
             ssApply();
@@ -148,15 +161,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!ssDragging) return;
             ssDragging = false;
             ssTrack.style.transition = '';
-            ssPauseUntil = Date.now() + 5000;
+            if (ssDragIsHorizontal) ssPauseUntil = Date.now() + 5000;
         };
 
-        ssTrack.addEventListener('touchstart', e => ssDragStart(e.touches[0].clientX), { passive: true });
-        ssTrack.addEventListener('touchmove', e => ssDragMove(e.touches[0].clientX), { passive: true });
+        ssTrack.addEventListener('touchstart', e => {
+            ssDragStart(e.touches[0].clientX, e.touches[0].clientY);
+        }, { passive: true });
+        ssTrack.addEventListener('touchmove', e => {
+            ssDragMove(e.touches[0].clientX, e.touches[0].clientY, e);
+        }, { passive: false });
         ssTrack.addEventListener('touchend', ssDragEnd);
 
-        ssTrack.addEventListener('mousedown', e => { e.preventDefault(); ssDragStart(e.clientX); });
-        window.addEventListener('mousemove', e => ssDragMove(e.clientX));
+        ssTrack.addEventListener('mousedown', e => { ssDragStart(e.clientX, e.clientY); });
+        window.addEventListener('mousemove', e => ssDragMove(e.clientX, e.clientY));
         window.addEventListener('mouseup', ssDragEnd);
     }
 
@@ -235,8 +252,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         behavior: 'smooth'
                     });
 
-                    visibleEl.classList.add('ss-highlight');
-                    setTimeout(() => visibleEl.classList.remove('ss-highlight'), 4000);
+                    visibleEl.style.setProperty('border', '3px solid #00C6B2', 'important');
+                    visibleEl.style.setProperty('box-shadow', '0 0 0 5px rgba(0,198,178,0.35)', 'important');
+                    setTimeout(() => {
+                        visibleEl.style.removeProperty('border');
+                        visibleEl.style.removeProperty('box-shadow');
+                    }, 4000);
                 } else {
                     target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
                 }
