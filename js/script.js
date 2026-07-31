@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const originalCount = ssTrack.children.length;
         Array.from(ssTrack.children).forEach(card => {
             const clone = card.cloneNode(true);
+            if (card.id) clone.dataset.cloneOf = card.id;
             clone.removeAttribute('id');
             clone.setAttribute('aria-hidden', 'true');
             clone.querySelectorAll('a').forEach(a => a.setAttribute('tabindex', '-1'));
@@ -60,18 +61,36 @@ document.addEventListener('DOMContentLoaded', () => {
             ssTrack.style.transform = `translateX(${-ssOffset}px)`;
         }
 
-        ssJumpTo = (target) => {
+        ssJumpTo = (id) => {
+            const candidates = ssTrack.querySelectorAll(`#${id}, [data-clone-of="${id}"]`);
             const viewport = ssTrack.parentElement;
             const viewportRect = viewport.getBoundingClientRect();
-            const targetRect = target.getBoundingClientRect();
-            const currentCenter = targetRect.left + targetRect.width / 2;
             const viewportCenter = viewportRect.left + viewportRect.width / 2;
+
+            let closest = null;
+            let closestDist = Infinity;
+            candidates.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const center = rect.left + rect.width / 2;
+                const dist = Math.abs(center - viewportCenter);
+                if (dist < closestDist) {
+                    closestDist = dist;
+                    closest = el;
+                }
+            });
+            if (!closest) return null;
+
+            const targetRect = closest.getBoundingClientRect();
+            const currentCenter = targetRect.left + targetRect.width / 2;
             ssOffset += (currentCenter - viewportCenter);
             if (ssOffset >= ssSetWidth) ssOffset -= ssSetWidth;
             if (ssOffset < 0) ssOffset += ssSetWidth;
+            ssTrack.style.transition = 'none';
+            ssTrack.offsetHeight; // force reflow so the transition below actually animates
             ssTrack.style.transition = 'transform 0.6s ease';
             ssApply();
             setTimeout(() => { ssTrack.style.transition = ''; }, 650);
+            return closest;
         };
 
         function ssTick() {
@@ -172,16 +191,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 if (ssTrack && ssTrack.contains(target)) {
                     ssPauseUntil = Date.now() + 4000;
-                    ssJumpTo?.(target);
+                    const visibleEl = ssJumpTo?.(targetId.slice(1)) || target;
 
-                    const pageTargetTop = target.getBoundingClientRect().top + window.scrollY;
+                    const pageTargetTop = visibleEl.getBoundingClientRect().top + window.scrollY;
                     window.scrollTo({
-                        top: pageTargetTop - (window.innerHeight / 2) + (target.offsetHeight / 2),
+                        top: pageTargetTop - (window.innerHeight / 2) + (visibleEl.offsetHeight / 2),
                         behavior: 'smooth'
                     });
 
-                    target.classList.add('ss-highlight');
-                    setTimeout(() => target.classList.remove('ss-highlight'), 1800);
+                    visibleEl.classList.add('ss-highlight');
+                    setTimeout(() => visibleEl.classList.remove('ss-highlight'), 4000);
                 } else {
                     target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
                 }
