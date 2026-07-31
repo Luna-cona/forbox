@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>박스풀 | 셀프 보관부터 부가 서비스까지, 공간 생태계 하나로</title>
+<meta name="description" content="박스풀은 셀프 스토리지, 배송형 보관, 부가 서비스(건프라공방·게임룸·오피스)를 하나로 연결한 공간 생태계입니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ==================== NAVBAR ==================== -->
+<header class="navbar" id="navbar">
+    <div class="nav-top">
+        <button class="nav-hamburger" aria-label="메뉴 열기">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+        <a href="#home" class="nav-logo">
+            <img src="images/boxful-logo.svg" alt="BOXFUL" class="logo-img">
+        </a>
+        <a href="#" class="nav-user-icon" aria-label="로그인">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+        </a>
+    </div>
+    <div class="nav-menu-row">
+        <div class="nav-lang">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9z"/></svg>
+            <span>한국어</span>
+            <svg class="nav-lang-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+        </div>
+        <nav class="nav-menu">
+            <a href="#services" class="nav-item active">서비스 소개</a>
+            <a href="#home" class="nav-item">보관하기</a>
+            <a href="#services-amenity" class="nav-item">프로모션</a>
+            <a href="#" class="nav-item">고객센터</a>
+            <a href="#franchise" class="nav-item">가맹문의</a>
+            <a href="#enterprise" class="nav-item">풀필먼트(기업전용)</a>
+        </nav>
+        <div class="nav-right">
+            <a href="#" class="nav-link-text">마이페이지</a>
+            <span class="nav-divider">|</span>
+            <a href="#" class="nav-link-text">로그인</a>
+        </div>
+    </div>
+</header>
+
+<!-- ==================== HERO (boxful.kr 원본 2분할 구조 유지) ==================== -->
+<section class="hero" id="home">
+    <div class="container">
+        <div class="section-head">
+            <h2 class="section-title">공간의 가치를 더하다,<br class="mobile-break"> <span class="text-teal">박스풀 공유창고</span></h2>
+            <p class="section-desc">당신의 일상을 넓히는 스마트한 보관 서비스.<br>집 앞 픽업부터 도심 속 개인 창고까지 박스풀이 제안하는 새로운 공간 경험을 시작하세요.</p>
+        </div>
+        <div class="hero-selector">
+            <div class="custom-select" id="serviceSelect">
+                <button type="button" class="custom-select-trigger" id="serviceSelectTrigger">
+                    <span>박스풀 서비스 둘러보기</span>
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+                </button>
+                <div class="custom-select-menu" id="serviceSelectMenu">
+                    <div class="custom-select-option" data-value="#home">셀프 스토리지</div>
+                    <div class="custom-select-option" data-value="#home">배송형 보관</div>
+                    <div class="custom-select-option" data-value="#services-amenity">부가 서비스 (건프라룸·보드게임룸·PS룸 등)</div>
+                    <div class="custom-select-option" data-value="#franchise">프랜차이즈 창업</div>
+                    <div class="custom-select-option" data-value="#enterprise">기업 풀필먼트</div>
+                </div>
+            </div>
+            <button id="serviceGoBtn" class="btn btn-teal">이동</button>
+        </div>
+        <div class="hero-artwork">
+            <img src="images/hero-ecosystem-illustration01.jpg" alt="박스풀 공간 생태계 일러스트">
+        </div>
+    </div>
+</section>
+
+<!-- ==================== QUICK SERVICE STRIP ==================== -->
+<section class="quick-strip">
+    <div class="container-narrow">
+        <div class="quick-strip-head">
+            <span class="section-label">SERVICE BOARD</span>
+            <p>박스풀이 제공하는 모든 공간 솔루션을 한눈에 경험해보세요.</p>
+        </div>
+        <div class="quick-strip-row">
+            <a href="#services" class="quick-strip-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 10v10"/></svg>
+                <span>셀프 창고</span>
+            </a>
+            <a href="#services" class="quick-strip-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>
+                <span>배송 보관</span>
+            </a>
+            <a href="#svc-3pl" class="quick-strip-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 4v10l-8 4-8-4V7z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg>
+                <span>3PL 물류</span>
+            </a>
+            <a href="#svc-gunpla" class="quick-strip-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.5 6.5l3 3L8 19l-4 1 1-4z"/><path d="M13 8l3 3"/></svg>
+                <span>도색룸</span>
+            </a>
+            <a href="#svc-boardgame" class="quick-strip-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="8.5" cy="8.5" r="1"/><circle cx="15.5" cy="15.5" r="1"/><circle cx="12" cy="12" r="1"/></svg>
+                <span>보드게임</span>
+            </a>
+            <a href="#svc-psroom" class="quick-strip-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9h12l2 3v6a1 1 0 0 1-1 1h-1l-1-2H7l-1 2H5a1 1 0 0 1-1-1v-6z"/><path d="M8 12h2M15 12h.01M17.5 10.5h.01"/></svg>
+                <span>플레이룸</span>
+            </a>
+            <a href="#svc-consignment" class="quick-strip-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 8-8 8-8-8z"/><circle cx="9" cy="9" r="1.3"/></svg>
+                <span>위탁판매</span>
+            </a>
+            <a href="#" class="quick-strip-item qs-password">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                <span>비밀번호 찾기</span>
+            </a>
+            <a href="#" class="quick-strip-item qs-qr">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14h2M14 19h2M19 19h2"/></svg>
+                <span>출입 QR</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="service-grid section-pad" id="services">
+    <div class="container-narrow">
+
+        <div class="hg-head">
+            <h2>보관 서비스</h2>
+            <p>언제 어디서나 간편하게 이용할 수 있는 박스풀의 핵심 보관 서비스입니다.</p>
+        </div>
+        <div class="hero-grid">
+            <div class="hg-card">
+                <div class="hg-image">
+                    <div class="hg-title-row"><span class="hg-icon"></span><h3>셀프 공유창고</h3></div>
+                    <img src="images/self-storage.gif" alt="셀프 공유창고">
+                </div>
+                <div class="hg-body">
+                    <p>내 집처럼 편안하게, 24시간 스마트 출입과 항온항습 관리가 완벽한 도심 속 개인 창고입니다. 다양한 사이즈의 유닛이 준비되어 있습니다.</p>
+                    <a href="#finder" class="hg-btn hg-btn-solid">이용하기</a>
+                </div>
+            </div>
+            <div class="hg-card">
+                <div class="hg-image">
+                    <div class="hg-title-row"><span class="hg-icon"></span><h3>배송형 공유창고</h3></div>
+                    <img src="images/delivery-storage.gif" alt="배송형 공유창고">
+                </div>
+                <div class="hg-body">
+                    <p>직접 방문할 필요 없이 문 앞까지 배송해 드립니다. 박스 하나부터 대형 가구까지 앱 하나로 편리하게 보관하고 찾으세요.</p>
+                    <a href="#" class="hg-btn hg-btn-text">이용하기</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="hg-head" id="services-amenity">
+            <h2>부가 서비스</h2>
+            <p>박스풀 일부 지점 한정 운영되는 특별한 부가 서비스입니다.</p>
+        </div>
+        <div class="amenity-banner">
+            <div class="amenity-banner-text">
+                <h4>박스풀에서 즐기는 특별한 공간!</h4>
+                <p>전문적인 물류 관리부터 취미 생활을 위한 전용 공간까지, 박스풀이 제공하는 부가 서비스를 편리하게 이용하세요.</p>
+            </div>
+            <img src="images/additional-service-banner.png" alt="박스풀에서 즐기는 특별한 공간">
+        </div>
+        <a href="#" class="sc-viewall">
+            <span>부가 서비스 바로가기</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <div class="ss-carousel-wrap">
+        <button class="finder-nav prev" id="ssPrev" aria-label="이전">‹</button>
+        <div class="service-cards service-cards-5" id="ssTrack">
+            <div class="service-card" id="svc-3pl">
+                <div class="sc-photo"><img src="images/svc-3pl.svg" alt="3PL 쇼핑몰 공유창고"></div>
+                <div class="sc-body">
+                    <div class="sc-title-row"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 4v10l-8 4-8-4V7z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg></div><h3>3PL 쇼핑몰 공유창고</h3></div>
+                    <p>온라인 쇼핑몰 사업자를 위한 보관·피킹포장·택배발송 공간.</p>
+                    <div class="sc-branch-links">
+                        <a href="#finder" class="sc-branch-btn">용인시청점 →</a>
+                        <a href="#finder" class="sc-branch-btn">송파점 →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="service-card" id="svc-gunpla">
+                <div class="sc-photo"><img src="images/svc-gunpla.svg" alt="건프라 조립/도색룸"></div>
+                <div class="sc-body">
+                    <div class="sc-title-row"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 6.5l3 3L8 19l-4 1 1-4z"/><path d="M13 8l3 3"/></svg></div><h3>건프라 조립/도색룸</h3></div>
+                    <p>건프라를 조립하고 도색할 수 있는 전용 공간.</p>
+                    <div class="sc-branch-links">
+                        <a href="#finder" class="sc-branch-btn">용인시청점 →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="service-card" id="svc-consignment">
+                <div class="sc-photo"><img src="images/svc-consignment.svg" alt="위탁판매함"></div>
+                <div class="sc-body">
+                    <div class="sc-title-row"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 8-8 8-8-8z"/><circle cx="9" cy="9" r="1.3"/></svg></div><h3>위탁판매함</h3></div>
+                    <p>소장품을 전시하고 판매까지 가능한 전용 전시함.</p>
+                    <div class="sc-branch-links">
+                        <a href="#finder" class="sc-branch-btn">용인시청점 →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="service-card" id="svc-boardgame">
+                <div class="sc-photo"><img src="images/svc-boardgame.svg" alt="보드게임룸"></div>
+                <div class="sc-body">
+                    <div class="sc-title-row"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="8.5" cy="8.5" r="1"/><circle cx="15.5" cy="15.5" r="1"/><circle cx="12" cy="12" r="1"/></svg></div><h3>보드게임룸</h3></div>
+                    <p>다양한 보드게임을 마음껏 즐길 수 있는 공간.</p>
+                    <div class="sc-branch-links">
+                        <a href="#finder" class="sc-branch-btn">용인시청점 →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="service-card" id="svc-psroom">
+                <div class="sc-photo"><img src="images/svc-psroom.svg" alt="PS룸"></div>
+                <div class="sc-body">
+                    <div class="sc-title-row"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9h12l2 3v6a1 1 0 0 1-1 1h-1l-1-2H7l-1 2H5a1 1 0 0 1-1-1v-6z"/><path d="M8 12h2M15 12h.01M17.5 10.5h.01"/></svg></div><h3>PS룸</h3></div>
+                    <p>플레이스테이션 게임을 자유롭게 즐기는 공간.</p>
+                    <div class="sc-branch-links">
+                        <a href="#finder" class="sc-branch-btn">용인시청점 →</a>
+                        <a href="#finder" class="sc-branch-btn">경북대점 →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="finder-nav next" id="ssNext" aria-label="다음">›</button>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FINDER TEASER (boxful.kr section2 참고) ==================== -->
+<section class="finder-teaser section-pad" id="finder">
+    <div class="container-narrow">
+        <h2 class="section-title finder-title">셀프 공유창고 어디에 있나요?</h2>
+        <div class="finder-filter-row">
+            <button class="finder-filter active">전체 지점</button>
+            <button class="finder-filter">서울</button>
+            <button class="finder-filter">경기</button>
+            <button class="finder-filter">인천</button>
+            <button class="finder-filter">세종</button>
+            <button class="finder-filter">경상도</button>
+            <button class="finder-filter">전라도</button>
+            <button class="finder-filter">강원도</button>
+            <button class="finder-filter">제주도</button>
+        </div>
+        <div class="finder-carousel-wrap">
+            <button class="finder-nav prev" id="finderPrev" aria-label="이전">‹</button>
+            <div class="finder-carousel" id="finderCarousel">
+                <div class="finder-card">
+                    <div class="finder-card-photo"><img src="images/stores/store_magok.png" alt="마곡 강서구 박스풀 공유창고"></div>
+                    <h4>마곡 강서구 박스풀 공유창고 | Magok Boxful | Gangseo Declutter Service</h4>
+                    <p class="finder-card-price">0.5M 월 66,000원~</p>
+                </div>
+                <div class="finder-card">
+                    <div class="finder-card-photo"><img src="images/stores/store_yeonhui.png" alt="짐보관 서대문구 | 연희동 공유창고"></div>
+                    <h4>짐보관 서대문구 | 연희동 공유창고<br>Yoenhui Self Storage</h4>
+                    <p class="finder-card-price">SB 월 30,000원~<br>0.5M 월 70,000원~</p>
+                </div>
+                <div class="finder-card">
+                    <div class="finder-card-photo"><img src="images/stores/store_yongsan.png" alt="용산점"></div>
+                    <h4>용산점</h4>
+                    <p class="finder-card-price">박스보관 월 6,600원~<br>의류박스보관 월 20,000원~</p>
+                </div>
+                <div class="finder-card">
+                    <div class="finder-card-photo"><img src="images/stores/store_apgujeong.png" alt="압구정 현대아파트 공유창고"></div>
+                    <h4>압구정 현대아파트 공유창고 | Apgujeong | Sinsa Declutter Service</h4>
+                    <p class="finder-card-price">SB 월 30,000원~<br>0.5M 월 100,000원~</p>
+                </div>
+                <div class="finder-card">
+                    <div class="finder-card-photo"><img src="images/stores/store_gyodae.png" alt="교대역 서초동 공유창고"></div>
+                    <h4>교대역 서초동 공유창고 | Seocho Gangnam</h4>
+                    <p class="finder-card-price">SB 월 30,000원~</p>
+                </div>
+                <div class="finder-card">
+                    <div class="finder-card-photo"><img src="images/stores/store_gwangju.png" alt="광주 삼동역 공유창고"></div>
+                    <h4>광주 삼동역 공유창고 | 경기도 짐보관 | Sungnam</h4>
+                    <p class="finder-card-price">0.5M 월 60,000원~<br>M 월 110,000원~</p>
+                </div>
+            </div>
+            <button class="finder-nav next" id="finderNext" aria-label="다음">›</button>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== SCENARIOS (Persona tabs) ==================== -->
+<section class="scenarios section-pad" id="scenarios">
+    <div class="container-narrow">
+        <div class="section-head">
+            <span class="section-label">USE CASES</span>
+            <h2 class="section-title">이렇게 쓰고 있어요</h2>
+        </div>
+
+        <div class="stabs">
+            <button class="stab active" data-persona="hobby">취미공간이 필요한 나</button>
+            <button class="stab" data-persona="startup">1인 창업·사이드잡</button>
+            <button class="stab" data-persona="moving">이사철 짐 정리</button>
+            <button class="stab" data-persona="franchise">가맹 창업 고민</button>
+        </div>
+
+        <div class="spanels">
+            <div class="spanel active" data-persona="hobby">
+                <div class="spanel-situation">
+                    <span class="spanel-tag">상황</span>
+                    <p>"본가에서 나와 자취를 시작했는데, 프라모델이랑 게임 콘솔 둘 곳이 없어요."</p>
+                </div>
+                <ul class="spanel-services">
+                    <li><span>📦</span>셀프 공유창고 — 계절옷·취미용품 보관</li>
+                    <li><span>🤖</span>건프라 공방 — 작업 공간 대여</li>
+                    <li><span>🎮</span>게임룸 — 친구들과 여가 시간</li>
+                </ul>
+            </div>
+            <div class="spanel" data-persona="startup">
+                <div class="spanel-situation">
+                    <span class="spanel-tag">상황</span>
+                    <p>"퇴근 후 부업으로 소품샵을 운영하는데, 재고 둘 곳도 일할 공간도 필요해요."</p>
+                </div>
+                <ul class="spanel-services">
+                    <li><span>🚚</span>배송형 공유창고 — 재고 픽업·보관</li>
+                    <li><span>🧑‍💻</span>스마트 오피스 — 포장·업무 공간</li>
+                </ul>
+            </div>
+            <div class="spanel" data-persona="moving">
+                <div class="spanel-situation">
+                    <span class="spanel-tag">상황</span>
+                    <p>"이사 날짜는 다가오는데 짐 둘 곳이 마땅치 않아요."</p>
+                </div>
+                <ul class="spanel-services">
+                    <li><span>📦</span>셀프 공유창고 — 자주 쓰는 짐</li>
+                    <li><span>🚚</span>배송형 공유창고 — 당장 안 쓰는 짐</li>
+                </ul>
+            </div>
+            <div class="spanel" data-persona="franchise">
+                <div class="spanel-situation">
+                    <span class="spanel-tag">상황</span>
+                    <p>"무인 창고 창업을 알아보고 있는데, 어디서부터 시작해야 할지 모르겠어요."</p>
+                </div>
+                <ul class="spanel-services">
+                    <li><span>🤝</span>프랜차이즈 창업 상담</li>
+                    <li><span>📦</span>운영 중인 지점 벤치마킹</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== SECURITY PROMISE ==================== -->
+<section class="security section-pad">
+    <div class="container-narrow">
+        <div class="security-grid">
+            <div class="security-text">
+                <h2>안심 공유창고, 박스풀이 약속합니다</h2>
+                <p>박스풀은 고객님의 소중한 물건을 가장 안전하게 보관하기 위해 최첨단 보안 시스템과 쾌적한 환경을 제공합니다. 전국 어디서나 믿고 이용할 수 있는 1등 브랜드입니다.</p>
+            </div>
+            <div class="security-cards">
+                <div class="security-card">
+                    <div class="security-title-row"><div class="security-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg></div><h4>24시간 보안</h4></div>
+                    <p>ADT 캡스 보안 시스템과 CCTV로 소중한 물품을 철저하게 관리합니다.</p>
+                </div>
+                <div class="security-card">
+                    <div class="security-title-row"><div class="security-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 14a2 2 0 104 0V5a2 2 0 10-4 0z"/><path d="M8 11h8"/></svg></div><h4>항온항습</h4></div>
+                    <p>최적의 온도와 습도를 일정하게 유지하여 최상의 보관 환경을 보장합니다.</p>
+                </div>
+                <div class="security-card">
+                    <div class="security-title-row"><div class="security-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h4>보험 가입</h4></div>
+                    <p>화재 및 도난 보험 가입으로 만일의 사태에도 안심하고 맡기실 수 있습니다.</p>
+                </div>
+                <div class="security-card">
+                    <div class="security-title-row"><div class="security-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div><h4>스마트 출입</h4></div>
+                    <p>앱을 통한 간편한 스마트키 발급으로 365일 언제든 자유롭게 출입 가능합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== ENTERPRISE ROW ==================== -->
+<section class="enterprise-section section-pad">
+    <div class="container-narrow">
+        <div class="hg-head">
+            <h2>박스풀과 함께하는 성공적인 사업 파트너</h2>
+            <p>무인 운영 시스템으로 인건비 걱정 없이, 안정적인 수익을 창출하세요. 박스풀만의 데이터 기반 상권 분석과 운영 노하우를 공유합니다.</p>
+        </div>
+        <div class="enterprise-row">
+            <div class="enterprise-banner" id="franchise">
+                <div>
+                    <h4>프랜차이즈 창업</h4>
+                    <p>무인 공유창고 창업, 박스풀과 함께 시작하세요.</p>
+                </div>
+                <a href="#" class="btn btn-outline">가맹 문의</a>
+            </div>
+            <div class="enterprise-banner dark" id="enterprise">
+                <div>
+                    <h4>기업 풀필먼트 <span class="badge-b2b">기업전용</span></h4>
+                    <p>물류·재고·배송까지, 기업 맞춤 풀필먼트 솔루션. 담당자가 직접 상담해드립니다.</p>
+                </div>
+                <a href="#" class="btn btn-teal">상담 신청</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== TRUST ==================== -->
+<section class="trust section-pad">
+    <div class="container trust-inner">
+        <div class="trust-stat"><strong>50+</strong><span>운영 지점</span></div>
+        <div class="trust-stat"><strong>10,000+</strong><span>누적 이용자</span></div>
+        <div class="trust-stat"><strong>4.8</strong><span>평균 만족도</span></div>
+        <a href="#" class="btn btn-teal">지금 바로 상담하기</a>
+    </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+    <div class="container footer-inner">
+        <p class="footer-biz">주식회사 박스풀 | 대표: 000 | 사업자등록번호: 000-00-00000<br>고객센터 02-561-4999 · 평일 10:00~18:00 (점심 12:00~13:00)<br>© 2026 Boxful. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
