@@ -312,9 +312,12 @@ img { display: block; max-width: 100%; }
 
 .ss-carousel-wrap { position: relative; }
 .service-cards-5 {
-    display: flex; gap: 20px; overflow-x: hidden; margin-bottom: 0;
+    display: flex; gap: 20px; overflow-x: auto; margin-bottom: 0;
     padding-top: 10px; margin-top: -10px;
+    scrollbar-width: none; -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
 }
+.service-cards-5::-webkit-scrollbar { display: none; }
 .service-cards-5 .service-card { flex: 0 0 280px; }
 
 .service-card {
