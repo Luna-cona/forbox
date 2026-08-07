@@ -54,11 +54,7 @@
     display: flex; align-items: center; justify-content: space-between; gap: 16px;
     border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; position: relative;
 }
-.ld-plan-best { border-color: var(--teal); }
-.ld-plan-badge {
-    position: absolute; top: -11px; right: 20px; background: var(--teal); color: var(--white);
-    font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 999px;
-}
+.ld-plan-selected { border-color: var(--teal); }
 .ld-plan-label { font-size: 0.72rem; font-weight: 700; color: var(--muted); letter-spacing: 0.03em; }
 .ld-plan-price { font-size: 1rem; font-weight: 700; color: var(--dark); margin-top: 4px; }
 .ld-plan-price s { color: var(--muted); font-weight: 400; margin: 0 4px; }
@@ -83,6 +79,8 @@
     scroll-snap-type: x mandatory; scroll-padding-inline: 6%;
 }
 .ld-amenity-grid::-webkit-scrollbar { display: none; }
+.ld-amenity-grid::before,
+.ld-amenity-grid::after { content: ''; flex: 0 0 6%; }
 .ld-amenity-card {
     flex: 0 0 88%; display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border);
     border-radius: 18px; overflow: hidden; transition: var(--trans);
@@ -104,16 +102,14 @@
 }
 .ld-amenity-price span { font-size: 0.75rem; color: var(--muted); }
 .ld-amenity-price strong { font-size: 0.85rem; font-weight: 800; color: var(--dark); white-space: nowrap; }
-.ld-amenity-link { margin-top: auto; font-size: 0.82rem; font-weight: 700; color: var(--teal); }
+.ld-amenity-link { margin-top: auto; align-self: flex-end; font-size: 0.82rem; font-weight: 700; color: var(--teal); }
 
 /* 시설 정보 */
 .ld-facility { padding-bottom: 48px; border-bottom: 8px solid var(--bg); margin-bottom: 48px; }
-.ld-facility-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 16px; }
-.ld-facility-item {
-    text-align: center; background: var(--bg); border-radius: 14px; padding: 20px 8px;
-}
-.ld-facility-item img { width: 32px; height: 32px; display: block; margin: 0 auto 10px; object-fit: contain; }
-.ld-facility-item p { font-size: 0.78rem; color: var(--text); font-weight: 600; }
+.ld-facility-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.ld-facility-item { display: flex; flex-direction: row; align-items: center; }
+.ld-facility-item img { width: 30px; height: 30px; margin-right: 8px; object-fit: contain; flex-shrink: 0; }
+.ld-facility-item p { font-size: 0.875rem; color: var(--text); line-height: 1.4; }
 
 /* 커스텀 보관 팁 */
 .ld-tips { padding-bottom: 100px; }

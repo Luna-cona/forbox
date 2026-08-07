@@ -101,13 +101,12 @@
                         </div>
                         <button class="ld-plan-btn">선택</button>
                     </div>
-                    <div class="ld-plan ld-plan-best">
-                        <span class="ld-plan-badge">Best Choice</span>
+                    <div class="ld-plan">
                         <div>
                             <span class="ld-plan-label">3 MONTHS PLAN</span>
                             <p class="ld-plan-price">85,500원 <s>90,000원</s> 월 28,500원</p>
                         </div>
-                        <button class="ld-plan-btn ld-plan-btn-teal">선택함</button>
+                        <button class="ld-plan-btn">선택</button>
                     </div>
                     <div class="ld-plan">
                         <div>
@@ -140,7 +139,6 @@
                             <div class="ld-amenity-price"><span>3개월 결제 플랜</span><strong>1,260,000원 선불 | 월420,000원</strong></div>
                             <div class="ld-amenity-price"><span>12개월 결제 플랜</span><strong>4,680,000원 선불 | 월390,000원</strong></div>
                         </div>
-                        <span class="ld-amenity-link">부가 서비스 자세히 보기 →</span>
                     </div>
                 </a>
                 <a href="index.html#svc-psroom" class="ld-amenity-card">
@@ -154,7 +152,6 @@
                         <div class="ld-amenity-price-list">
                             <div class="ld-amenity-price"><span>3시간 결제 플랜</span><strong>20,000원</strong></div>
                         </div>
-                        <span class="ld-amenity-link">부가 서비스 자세히 보기 →</span>
                     </div>
                 </a>
                 <a href="index.html#svc-gunpla" class="ld-amenity-card">
@@ -170,7 +167,6 @@
                             <div class="ld-amenity-price"><span>3개월 결제 플랜</span><strong>407,250원 | 월135,750원</strong></div>
                             <div class="ld-amenity-price"><span>12개월 결제 플랜</span><strong>1,530,000원 | 월127,500원</strong></div>
                         </div>
-                        <span class="ld-amenity-link">부가 서비스 자세히 보기 →</span>
                     </div>
                 </a>
                 <a href="index.html#svc-boardgame" class="ld-amenity-card">
@@ -184,7 +180,6 @@
                         <div class="ld-amenity-price-list">
                             <div class="ld-amenity-price"><span>3시간 결제 플랜</span><strong>20,000원</strong></div>
                         </div>
-                        <span class="ld-amenity-link">부가 서비스 자세히 보기 →</span>
                     </div>
                 </a>
                 <a href="http://pf.kakao.com/_xhQMWj/chat" target="_blank" rel="noopener noreferrer" class="ld-amenity-card">
@@ -292,14 +287,101 @@ document.querySelectorAll('.ld-size-tab').forEach(tab => {
     });
 });
 
+document.querySelectorAll('.ld-size-plans .ld-plan').forEach(plan => {
+    const planBtn = plan.querySelector('.ld-plan-btn');
+    plan.addEventListener('mouseenter', () => {
+        plan.classList.add('ld-plan-selected');
+        planBtn.textContent = '선택함';
+        planBtn.classList.add('ld-plan-btn-teal');
+    });
+    plan.addEventListener('mouseleave', () => {
+        plan.classList.remove('ld-plan-selected');
+        planBtn.textContent = '선택';
+        planBtn.classList.remove('ld-plan-btn-teal');
+    });
+});
+
 const ldAmenityGrid = document.querySelector('.ld-amenity-grid');
-const ldAmenityStep = () => ldAmenityGrid.querySelector('.ld-amenity-card').offsetWidth + 16;
-document.getElementById('ldAmenityPrev')?.addEventListener('click', () => {
-    ldAmenityGrid.scrollBy({ left: -ldAmenityStep(), behavior: 'smooth' });
-});
-document.getElementById('ldAmenityNext')?.addEventListener('click', () => {
-    ldAmenityGrid.scrollBy({ left: ldAmenityStep(), behavior: 'smooth' });
-});
+
+if (ldAmenityGrid) {
+    // 캐러셀 가로 스크롤만 움직이고, 페이지 세로 스크롤에는 영향을 주지 않는 중앙 정렬 함수
+    const ldAmenityCenterOn = (card) => {
+        const gridRect = ldAmenityGrid.getBoundingClientRect();
+        const cardRect = card.getBoundingClientRect();
+        const delta = (cardRect.left + cardRect.width / 2) - (gridRect.left + gridRect.width / 2);
+        ldAmenityGrid.scrollLeft += delta;
+    };
+
+    /* 무한 루프: 첫/마지막 카드를 반대쪽 끝에 복제해서 항상 이전·다음 카드가 살짝 보이게 함 */
+    const ldAmenityRealCards = [...ldAmenityGrid.querySelectorAll('.ld-amenity-card')];
+    if (ldAmenityRealCards.length > 1) {
+        const ldAmenityMakeClone = (card) => {
+            const clone = card.cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            clone.setAttribute('tabindex', '-1');
+            return clone;
+        };
+        ldAmenityGrid.prepend(ldAmenityMakeClone(ldAmenityRealCards[ldAmenityRealCards.length - 1]));
+        ldAmenityGrid.append(ldAmenityMakeClone(ldAmenityRealCards[0]));
+        // 실제 첫 카드가 중앙에 오도록 초기 위치를 애니메이션 없이 맞춰둠 (페이지 세로 스크롤은 건드리지 않음)
+        ldAmenityCenterOn(ldAmenityRealCards[0]);
+    }
+
+    const ldAmenityStep = () => ldAmenityGrid.querySelector('.ld-amenity-card').offsetWidth + 16;
+
+    document.getElementById('ldAmenityPrev')?.addEventListener('click', () => {
+        ldAmenityGrid.scrollBy({ left: -ldAmenityStep(), behavior: 'smooth' });
+    });
+    document.getElementById('ldAmenityNext')?.addEventListener('click', () => {
+        ldAmenityGrid.scrollBy({ left: ldAmenityStep(), behavior: 'smooth' });
+    });
+
+    // 스크롤이 멈췄을 때 복제 카드 위(경계)에 있으면 실제 카드 위치로 티 안 나게 순간 이동
+    let ldAmenitySettleTimer = null;
+    ldAmenityGrid.addEventListener('scroll', () => {
+        clearTimeout(ldAmenitySettleTimer);
+        ldAmenitySettleTimer = setTimeout(() => {
+            const cards = [...ldAmenityGrid.querySelectorAll('.ld-amenity-card')];
+            if (cards.length < 3) return;
+            const cloneAtStart = cards[0];
+            const cloneAtEnd = cards[cards.length - 1];
+            const realFirst = cards[1];
+            const realLast = cards[cards.length - 2];
+            const gridRect = ldAmenityGrid.getBoundingClientRect();
+            const gridCenter = gridRect.left + gridRect.width / 2;
+            const isCentered = (el) => {
+                const r = el.getBoundingClientRect();
+                return Math.abs((r.left + r.width / 2) - gridCenter) < 4;
+            };
+            if (isCentered(cloneAtStart)) {
+                ldAmenityCenterOn(realLast);
+            } else if (isCentered(cloneAtEnd)) {
+                ldAmenityCenterOn(realFirst);
+            }
+        }, 120);
+    }, { passive: true });
+
+    /* 자동 슬라이드 */
+    let ldAmenityPaused = false;
+    let ldAmenityTimer = null;
+
+    const ldAmenityAutoNext = () => {
+        if (ldAmenityPaused) return;
+        ldAmenityGrid.scrollBy({ left: ldAmenityStep(), behavior: 'smooth' });
+    };
+    const ldAmenityRestart = () => {
+        clearInterval(ldAmenityTimer);
+        ldAmenityTimer = setInterval(ldAmenityAutoNext, 3500);
+    };
+
+    ldAmenityRestart();
+    ['mouseenter', 'touchstart', 'pointerdown'].forEach(evt => {
+        ldAmenityGrid.addEventListener(evt, () => { ldAmenityPaused = true; }, { passive: true });
+    });
+    ['mouseleave', 'touchend', 'pointerup'].forEach(evt => {
+        ldAmenityGrid.addEventListener(evt, () => { ldAmenityPaused = false; ldAmenityRestart(); }, { passive: true });
+    });
+}
 </script>
 </body>
 </html>
