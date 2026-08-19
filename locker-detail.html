@@ -75,7 +75,7 @@
         <!-- ==================== 서비스 바로가기 (index.html quick-strip-row 참고) ==================== -->
         <div class="ld-quick-strip">
             <div class="quick-strip-row">
-                <a href="#ld-size" class="quick-strip-item ld-panel-btn" data-panel="ld-size">
+                <a href="#ld-size" class="quick-strip-item ld-panel-btn active" data-panel="ld-size">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 10v10"/></svg>
                     <span>셀프 공유창고</span>
                 </a>
@@ -216,12 +216,12 @@
         </section>
 
         <!-- ==================== 특별 공간 서비스 (신규 추가 영역, 패널 토글 방식) ==================== -->
-        <div class="ld-amenity ld-amenity-intro" id="ld-amenity">
+        <div class="ld-amenity ld-amenity-intro ld-panel" id="ld-amenity">
             <h5 class="ld-h5">박스풀 용인시청점 특별 공간 서비스</h5>
             <p class="ld-amenity-sub">단순 보관을 넘어, 당신의 라이프스타일을 완성하는 맞춤형 공간입니다.</p>
         </div>
 
-        <section class="ld-size ld-panel ld-group-amenity ld-panel-active" id="ld-panel-game">
+        <section class="ld-size ld-panel ld-group-amenity" id="ld-panel-game">
             <h5 class="ld-h5">게임룸 (PS/Xbox)</h5>
             <div class="ld-panel-card">
                 <div class="ld-amenity-photo"><img src="images/locker26/amenity_game.jpg" alt="게임룸" loading="lazy"></div>
@@ -344,11 +344,11 @@
 </main>
 
 <!-- ==================== 하단 고정 요소 (sc-44bff6aa-28/30) ==================== -->
-<a href="https://www.boxful.kr/store/guide/26" target="_blank" rel="noreferrer" class="ld-guide-float">
-    <img src="images/boxful-logo.svg" alt="">
-    <span>지점이용방법</span>
-</a>
 <div class="ld-sticky-bar">
+    <a href="https://www.boxful.kr/store/guide/26" target="_blank" rel="noopener noreferrer" class="ld-guide-float">
+        <img src="images/store-guid-btn.gif" alt="지점이용방법">
+        <span>지점이용방법</span>
+    </a>
     <button class="ld-sticky-reserve">예약하기</button>
 </div>
 
@@ -394,17 +394,25 @@ document.querySelectorAll('.ld-photo-slider').forEach(slider => {
     setInterval(next, 2800);
 });
 
+function activateLdPanel(btn, { scroll } = {}) {
+    const targetId = btn.dataset.panel;
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    document.querySelectorAll('.ld-panel').forEach(p => {
+        p.classList.toggle('ld-panel-active', p.id === targetId);
+    });
+    document.getElementById('ld-amenity')?.classList.toggle('ld-panel-active', target.classList.contains('ld-group-amenity'));
+    document.querySelectorAll('.ld-panel-btn').forEach(b => {
+        b.classList.toggle('active', b === btn);
+    });
+    if (scroll) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 document.querySelectorAll('.ld-panel-btn').forEach(btn => {
+    btn.addEventListener('mouseenter', () => activateLdPanel(btn, { scroll: false }));
     btn.addEventListener('click', (e) => {
         e.preventDefault();
-        const targetId = btn.dataset.panel;
-        const target = document.getElementById(targetId);
-        if (!target) return;
-        const groupSelector = target.classList.contains('ld-group-amenity') ? '.ld-group-amenity' : '.ld-group-storage';
-        document.querySelectorAll(groupSelector).forEach(p => {
-            p.classList.toggle('ld-panel-active', p.id === targetId);
-        });
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        activateLdPanel(btn, { scroll: true });
     });
 });
 
