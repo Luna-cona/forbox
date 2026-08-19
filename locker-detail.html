@@ -405,7 +405,23 @@ function activateLdPanel(btn, { scroll } = {}) {
     document.querySelectorAll('.ld-panel-btn').forEach(b => {
         b.classList.toggle('active', b === btn);
     });
-    if (scroll) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (scroll) scrollToLdTarget(target);
+}
+
+function scrollToLdTarget(target) {
+    const getTop = () => {
+        const navbar = document.getElementById('navbar');
+        const offset = (navbar?.offsetHeight || 0) + 16;
+        return target.getBoundingClientRect().top + window.scrollY - offset;
+    };
+    window.scrollTo({ top: getTop(), behavior: 'smooth' });
+    // 모바일에서는 첫 스크롤 도중 주소창이 접히거나 이미지/폰트가 늦게 자리잡으며
+    // 애니메이션이 끝난 지점이 어긋나는 경우가 있어, 완료 후 위치를 한 번 더 보정한다.
+    setTimeout(() => {
+        if (Math.abs(window.scrollY - getTop()) > 4) {
+            window.scrollTo({ top: getTop(), behavior: 'smooth' });
+        }
+    }, 500);
 }
 
 document.querySelectorAll('.ld-panel-btn').forEach(btn => {
