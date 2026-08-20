@@ -58,13 +58,15 @@ body { background: var(--bg); }
 .ld-quick-strip .quick-strip-item svg { width: 20px; height: 20px; color: var(--muted); transition: var(--trans); }
 .ld-quick-strip .quick-strip-item span { font-size: 0.68rem; white-space: normal; text-align: center; line-height: 1.25; transition: var(--trans); }
 .ld-quick-strip .quick-strip-placeholder { visibility: hidden; }
-.ld-quick-strip .quick-strip-item.active,
-.ld-quick-strip .quick-strip-item:hover { background: var(--teal); border-color: var(--teal); }
+.ld-quick-strip .quick-strip-item.active { background: var(--teal); border-color: var(--teal); }
 .ld-quick-strip .quick-strip-item.active svg,
-.ld-quick-strip .quick-strip-item.active span,
-.ld-quick-strip .quick-strip-item:hover svg,
-.ld-quick-strip .quick-strip-item:hover span { color: var(--white); }
+.ld-quick-strip .quick-strip-item.active span { color: var(--white); }
 .ld-quick-strip .quick-strip-item.active span { font-weight: 600; }
+@media (hover: hover) and (pointer: fine) {
+    .ld-quick-strip .quick-strip-item:hover { background: var(--teal); border-color: var(--teal); }
+    .ld-quick-strip .quick-strip-item:hover svg,
+    .ld-quick-strip .quick-strip-item:hover span { color: var(--white); }
+}
 
 .ld-h5 { font-size: 1.2rem; font-weight: 400; color: var(--dark); margin-bottom: 20px; }
 .ld-h6 { font-size: 1.05rem; font-weight: 500; color: var(--dark); margin-bottom: 20px; }
