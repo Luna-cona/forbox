@@ -197,40 +197,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* =============================================
-       HERO — Custom Service Selector
+       FINDER — Search Bar
        ============================================= */
-    const serviceSelect = document.getElementById('serviceSelect');
-    const serviceSelectTrigger = document.getElementById('serviceSelectTrigger');
-    const serviceSelectLabel = serviceSelectTrigger?.querySelector('span');
-    const serviceSelectOptions = document.querySelectorAll('.custom-select-option');
-    const serviceGoBtn = document.getElementById('serviceGoBtn');
-    let selectedValue = '';
+    const heroSearchForm = document.getElementById('heroSearchForm');
 
-    serviceSelectTrigger?.addEventListener('click', e => {
-        e.stopPropagation();
-        serviceSelect.classList.toggle('open');
-    });
-
-    serviceSelectOptions.forEach(option => {
-        option.addEventListener('click', () => {
-            selectedValue = option.dataset.value;
-            serviceSelectLabel.textContent = option.textContent;
-            serviceSelectOptions.forEach(o => o.classList.remove('selected'));
-            option.classList.add('selected');
-            serviceSelect.classList.remove('open');
-        });
-    });
-
-    document.addEventListener('click', e => {
-        if (serviceSelect && !serviceSelect.contains(e.target)) {
-            serviceSelect.classList.remove('open');
-        }
-    });
-
-    serviceGoBtn?.addEventListener('click', () => {
-        if (!selectedValue) return;
-        const target = document.querySelector(selectedValue);
-        target?.scrollIntoView({ behavior: 'smooth' });
+    heroSearchForm?.addEventListener('submit', e => {
+        e.preventDefault();
     });
 
     /* =============================================

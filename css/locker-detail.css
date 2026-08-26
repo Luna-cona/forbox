@@ -48,11 +48,11 @@ body { background: var(--bg); }
 
 .ld-quick-strip { margin-bottom: 48px; }
 .ld-quick-strip .quick-strip-row {
-    display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px;
     border: none; border-radius: 0;
 }
 .ld-quick-strip .quick-strip-item {
-    border: 1px solid var(--border); border-radius: 12px; min-width: 0; padding: 12px 4px;
+    border: 1px solid var(--border); border-radius: 8px; min-width: 0; padding: 12px 4px;
     order: 0; flex: none;
 }
 .ld-quick-strip .quick-strip-item svg { width: 20px; height: 20px; color: var(--muted); transition: var(--trans); }
@@ -143,7 +143,8 @@ body { background: var(--bg); }
 .ld-amenity-title-row svg { width: 20px; height: 20px; color: var(--teal); flex-shrink: 0; }
 .ld-amenity-title-row h3 { font-size: 1rem; font-weight: 600; color: var(--dark); }
 .ld-amenity-body p { font-size: 0.82rem; color: var(--muted); line-height: 1.55; word-break: keep-all; margin-bottom: 14px; }
-.ld-amenity-dim { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
+.ld-amenity-body p.ld-amenity-dim { font-size: 0.9rem; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+.ld-amenity-body p.ld-amenity-desc { font-size: 0.92rem; font-weight: 400; color: var(--muted); line-height: 1.55; word-break: keep-all; margin-bottom: 16px; }
 .ld-amenity-price-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
 .ld-amenity-price {
     display: flex; flex-direction: column; gap: 4px;

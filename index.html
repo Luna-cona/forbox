@@ -56,22 +56,6 @@
             <h2 class="section-title">공간의 가치를 더하다,<br class="mobile-break"> <span class="text-teal">박스풀 공유창고</span></h2>
             <p class="section-desc">당신의 일상을 넓히는 스마트한 보관 서비스.<br>집 앞 픽업부터 도심 속 개인 창고까지 박스풀이 제안하는 새로운 공간 경험을 시작하세요.</p>
         </div>
-        <div class="hero-selector">
-            <div class="custom-select" id="serviceSelect">
-                <button type="button" class="custom-select-trigger" id="serviceSelectTrigger">
-                    <span>박스풀 서비스 둘러보기</span>
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
-                </button>
-                <div class="custom-select-menu" id="serviceSelectMenu">
-                    <div class="custom-select-option" data-value="#home">셀프 스토리지</div>
-                    <div class="custom-select-option" data-value="#home">배송형 보관</div>
-                    <div class="custom-select-option" data-value="#services-amenity">부가 서비스 (건프라룸·보드게임룸·PS룸 등)</div>
-                    <div class="custom-select-option" data-value="#franchise">프랜차이즈 창업</div>
-                    <div class="custom-select-option" data-value="#enterprise">기업 풀필먼트</div>
-                </div>
-            </div>
-            <button id="serviceGoBtn" class="btn btn-teal">이동</button>
-        </div>
         <div class="hero-artwork">
             <img src="images/hero-ecosystem-illustration01.jpg" alt="박스풀 공간 생태계 일러스트">
         </div>
@@ -86,42 +70,58 @@
             <p>박스풀이 제공하는 모든 공간 솔루션을 한눈에 경험해보세요.</p>
         </div>
         <div class="quick-strip-row">
-            <a href="#services" class="quick-strip-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 10v10"/></svg>
-                <span>셀프 창고</span>
+            <a href="https://www.boxful.kr/product/" class="quick-strip-card">
+                <span class="qsc-icon"><img src="images/qs-self-storage.svg" alt="" loading="lazy"></span>
+                <h4>셀프 공유창고</h4>
+                <p>24시간 스마트 출입, 항온항습 관리되는 도심 속 개인 창고</p>
+                <span class="qsc-more">이용하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </a>
-            <a href="#services" class="quick-strip-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>
-                <span>배송 보관</span>
+            <a href="https://www.boxful.kr/product/" class="quick-strip-card">
+                <span class="qsc-icon"><img src="images/qs-delivery-storage.svg" alt="" loading="lazy"></span>
+                <h4>배송형 공유창고</h4>
+                <p>박스 하나부터 대형 가구까지, 문 앞까지 배송해 드려요</p>
+                <span class="qsc-more">이용하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </a>
-            <a href="#svc-3pl" class="quick-strip-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 4v10l-8 4-8-4V7z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg>
-                <span>3PL 물류</span>
+            <a href="#svc-3pl" class="quick-strip-card">
+                <span class="qsc-icon"><img src="images/qs-mall-storage.svg" alt="" loading="lazy"></span>
+                <h4>쇼핑몰 공유창고</h4>
+                <p>온라인 쇼핑몰 사업자를 위한 보관·피킹포장·택배발송 공간</p>
+                <span class="qsc-more">이용하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </a>
-            <a href="#svc-gunpla" class="quick-strip-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.5 6.5l3 3L8 19l-4 1 1-4z"/><path d="M13 8l3 3"/></svg>
-                <span>도색룸</span>
+            <a href="#svc-consignment" class="quick-strip-card">
+                <span class="qsc-icon"><img src="images/qs-consignment.svg" alt="" loading="lazy"></span>
+                <h4>위탁판매</h4>
+                <p>소장품을 전시하고 판매까지 가능한 전용 전시함</p>
+                <span class="qsc-more">이용하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </a>
-            <a href="#svc-boardgame" class="quick-strip-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="8.5" cy="8.5" r="1"/><circle cx="15.5" cy="15.5" r="1"/><circle cx="12" cy="12" r="1"/></svg>
-                <span>보드게임</span>
+            <a href="#svc-gunpla" class="quick-strip-card">
+                <span class="qsc-icon"><img src="images/qs-gunpla.svg" alt="" loading="lazy"></span>
+                <h4>건프라 도색룸</h4>
+                <p>건프라를 조립하고 도색할 수 있는 전용 공간</p>
+                <span class="qsc-more">이용하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </a>
-            <a href="#svc-psroom" class="quick-strip-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9h12l2 3v6a1 1 0 0 1-1 1h-1l-1-2H7l-1 2H5a1 1 0 0 1-1-1v-6z"/><path d="M8 12h2M15 12h.01M17.5 10.5h.01"/></svg>
-                <span>플레이룸</span>
+            <a href="#svc-boardgame" class="quick-strip-card">
+                <span class="qsc-icon"><img src="images/qs-boardgame.svg" alt="" loading="lazy"></span>
+                <h4>보드게임룸</h4>
+                <p>다양한 보드게임을 마음껏 즐길 수 있는 공간</p>
+                <span class="qsc-more">이용하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </a>
-            <a href="#svc-consignment" class="quick-strip-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 8-8 8-8-8z"/><circle cx="9" cy="9" r="1.3"/></svg>
-                <span>위탁판매</span>
+            <a href="#svc-psroom" class="quick-strip-card">
+                <span class="qsc-icon"><img src="images/qs-psroom.svg" alt="" loading="lazy"></span>
+                <h4>PS룸</h4>
+                <p>플레이스테이션 게임을 자유롭게 즐기는 공간</p>
+                <span class="qsc-more">이용하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </a>
-            <a href="#" class="quick-strip-item qs-password">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-                <span>비밀번호 찾기</span>
-            </a>
-            <a href="#" class="quick-strip-item qs-qr">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14h2M14 19h2M19 19h2"/></svg>
-                <span>출입 QR</span>
-            </a>
+            <div class="quick-strip-utility-pair">
+                <a href="#" class="quick-strip-item qs-password">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                    <span>공유창고 비밀번호 찾기</span>
+                </a>
+                <a href="#" class="quick-strip-item qs-qr">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14h2M14 19h2M19 19h2"/></svg>
+                    <span>공유창고 지점 출입 QR</span>
+                </a>
+            </div>
         </div>
     </div>
 </section>
@@ -176,7 +176,7 @@
         <div class="ss-viewport">
         <div class="service-cards service-cards-5" id="ssTrack">
             <div class="service-card" id="svc-3pl">
-                <div class="sc-photo"><img src="images/svc-3pl.svg" alt="3PL 쇼핑몰 공유창고" loading="lazy"></div>
+                <div class="sc-photo"><img src="images/svc_3pl.png" alt="3PL 쇼핑몰 공유창고" loading="lazy"></div>
                 <div class="sc-body">
                     <div class="sc-title-row"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 4v10l-8 4-8-4V7z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg></div><h3>3PL 쇼핑몰 공유창고</h3></div>
                     <p>온라인 쇼핑몰 사업자를 위한 보관·피킹포장·택배발송 공간.</p>
@@ -187,7 +187,7 @@
                 </div>
             </div>
             <div class="service-card" id="svc-gunpla">
-                <div class="sc-photo"><img src="images/svc-gunpla.svg" alt="건프라 조립/도색룸" loading="lazy"></div>
+                <div class="sc-photo"><img src="images/svc_gunpla.png" alt="건프라 조립/도색룸" loading="lazy"></div>
                 <div class="sc-body">
                     <div class="sc-title-row"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 6.5l3 3L8 19l-4 1 1-4z"/><path d="M13 8l3 3"/></svg></div><h3>건프라 조립/도색룸</h3></div>
                     <p>건프라를 조립하고 도색할 수 있는 전용 공간.</p>
@@ -197,7 +197,7 @@
                 </div>
             </div>
             <div class="service-card" id="svc-consignment">
-                <div class="sc-photo"><img src="images/svc-consignment.svg" alt="위탁판매함" loading="lazy"></div>
+                <div class="sc-photo"><img src="images/svc_consignment.png" alt="위탁판매함" loading="lazy"></div>
                 <div class="sc-body">
                     <div class="sc-title-row"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 8-8 8-8-8z"/><circle cx="9" cy="9" r="1.3"/></svg></div><h3>위탁판매함</h3></div>
                     <p>소장품을 전시하고 판매까지 가능한 전용 전시함.</p>
@@ -207,7 +207,7 @@
                 </div>
             </div>
             <div class="service-card" id="svc-boardgame">
-                <div class="sc-photo"><img src="images/svc-boardgame.svg" alt="보드게임룸" loading="lazy"></div>
+                <div class="sc-photo"><img src="images/svc_boardgame.png" alt="보드게임룸" loading="lazy"></div>
                 <div class="sc-body">
                     <div class="sc-title-row"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="8.5" cy="8.5" r="1"/><circle cx="15.5" cy="15.5" r="1"/><circle cx="12" cy="12" r="1"/></svg></div><h3>보드게임룸</h3></div>
                     <p>다양한 보드게임을 마음껏 즐길 수 있는 공간.</p>
@@ -217,7 +217,7 @@
                 </div>
             </div>
             <div class="service-card" id="svc-psroom">
-                <div class="sc-photo"><img src="images/svc-psroom.svg" alt="PS룸" loading="lazy"></div>
+                <div class="sc-photo"><img src="images/svc_psroom.png" alt="PS룸" loading="lazy"></div>
                 <div class="sc-body">
                     <div class="sc-title-row"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9h12l2 3v6a1 1 0 0 1-1 1h-1l-1-2H7l-1 2H5a1 1 0 0 1-1-1v-6z"/><path d="M8 12h2M15 12h.01M17.5 10.5h.01"/></svg></div><h3>PS룸</h3></div>
                     <p>플레이스테이션 게임을 자유롭게 즐기는 공간.</p>
@@ -238,6 +238,11 @@
 <section class="finder-teaser section-pad" id="finder">
     <div class="container-narrow">
         <h2 class="section-title finder-title">셀프 공유창고 어디에 있나요?</h2>
+        <form class="hero-search" id="heroSearchForm" role="search">
+            <svg class="hero-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input type="text" class="hero-search-input" id="heroSearchInput" placeholder="지역, 지점명으로 검색" autocomplete="off">
+            <button type="submit" class="btn btn-teal hero-search-btn">검색</button>
+        </form>
         <div class="finder-filter-row">
             <button class="finder-filter active">전체 지점</button>
             <button class="finder-filter">서울</button>
