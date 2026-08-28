@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -62,6 +63,50 @@
     </div>
 </section>
 
+<!-- ==================== FINDER TEASER (boxful.kr section2 참고) ==================== -->
+<section class="finder-teaser section-pad" id="finder">
+    <div class="container-narrow">
+        <h2 class="section-title finder-title">가까운 박스풀 공간을 찾아보세요</h2>
+        <form class="hero-search" id="heroSearchForm" role="search">
+            <svg class="hero-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input type="text" class="hero-search-input" id="heroSearchInput" placeholder="지역, 지점명으로 검색" autocomplete="off">
+            <button type="submit" class="btn btn-teal hero-search-btn">검색</button>
+        </form>
+        <div class="finder-toolbar">
+            <div class="finder-filter-row">
+                <button class="finder-filter active" data-region="all">전체 지점</button>
+                <button class="finder-filter" data-region="서울">서울</button>
+                <button class="finder-filter" data-region="경기">경기</button>
+                <button class="finder-filter" data-region="인천">인천</button>
+                <button class="finder-filter" data-region="세종">세종</button>
+                <button class="finder-filter" data-region="경상도">경상도</button>
+                <button class="finder-filter" data-region="전라도">전라도</button>
+                <button class="finder-filter" data-region="강원도">강원도</button>
+                <button class="finder-filter" data-region="제주도">제주도</button>
+            </div>
+            <button class="finder-view-toggle" id="finderViewToggle" type="button" aria-label="목록으로 보기">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                <span class="finder-view-label">목록으로 보기</span>
+            </button>
+        </div>
+
+        <div class="finder-view finder-view-list" id="finderViewList">
+            <div class="finder-carousel-wrap">
+                <button class="finder-nav prev" id="finderPrev" aria-label="이전">‹</button>
+                <div class="finder-carousel" id="finderCarousel"></div>
+                <button class="finder-nav next" id="finderNext" aria-label="다음">›</button>
+            </div>
+        </div>
+
+        <div class="finder-view finder-view-map active" id="finderViewMap">
+            <div class="finder-split">
+                <div class="finder-list" id="finderList"></div>
+                <div class="finder-map-canvas" id="finderMap"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ==================== QUICK SERVICE STRIP ==================== -->
 <section class="quick-strip">
     <div class="container-narrow">
@@ -69,59 +114,47 @@
             <span class="section-label">SERVICE BOARD</span>
             <p>박스풀이 제공하는 모든 공간 솔루션을 한눈에 경험해보세요.</p>
         </div>
-        <div class="quick-strip-row">
-            <a href="https://www.boxful.kr/product/" class="quick-strip-card">
-                <span class="qsc-icon"><img src="images/qs-self-storage.svg" alt="" loading="lazy"></span>
-                <h4>셀프 공유창고</h4>
-                <p>24시간 스마트 출입, 항온항습 관리되는 도심 속 개인 창고</p>
-                <span class="qsc-more">이용하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a href="https://www.boxful.kr/product/" class="quick-strip-card">
-                <span class="qsc-icon"><img src="images/qs-delivery-storage.svg" alt="" loading="lazy"></span>
-                <h4>배송형 공유창고</h4>
-                <p>박스 하나부터 대형 가구까지, 문 앞까지 배송해 드려요</p>
-                <span class="qsc-more">이용하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a href="#svc-3pl" class="quick-strip-card">
-                <span class="qsc-icon"><img src="images/qs-mall-storage.svg" alt="" loading="lazy"></span>
-                <h4>쇼핑몰 공유창고</h4>
-                <p>온라인 쇼핑몰 사업자를 위한 보관·피킹포장·택배발송 공간</p>
-                <span class="qsc-more">이용하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a href="#svc-consignment" class="quick-strip-card">
-                <span class="qsc-icon"><img src="images/qs-consignment.svg" alt="" loading="lazy"></span>
-                <h4>위탁판매</h4>
-                <p>소장품을 전시하고 판매까지 가능한 전용 전시함</p>
-                <span class="qsc-more">이용하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a href="#svc-gunpla" class="quick-strip-card">
-                <span class="qsc-icon"><img src="images/qs-gunpla.svg" alt="" loading="lazy"></span>
-                <h4>건프라 도색룸</h4>
-                <p>건프라를 조립하고 도색할 수 있는 전용 공간</p>
-                <span class="qsc-more">이용하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a href="#svc-boardgame" class="quick-strip-card">
-                <span class="qsc-icon"><img src="images/qs-boardgame.svg" alt="" loading="lazy"></span>
-                <h4>보드게임룸</h4>
-                <p>다양한 보드게임을 마음껏 즐길 수 있는 공간</p>
-                <span class="qsc-more">이용하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a href="#svc-psroom" class="quick-strip-card">
-                <span class="qsc-icon"><img src="images/qs-psroom.svg" alt="" loading="lazy"></span>
-                <h4>PS룸</h4>
-                <p>플레이스테이션 게임을 자유롭게 즐기는 공간</p>
-                <span class="qsc-more">이용하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <div class="quick-strip-utility-pair">
-                <a href="#" class="quick-strip-item qs-password">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-                    <span>공유창고 비밀번호 찾기</span>
+        <div class="quick-strip-row-wrap">
+            <button class="finder-nav prev" id="qsPrev" aria-label="이전">‹</button>
+            <div class="quick-strip-row" id="qsTrack">
+                <a href="#" class="quick-strip-pill qs-password">
+                    <span class="qsp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+                    <span class="qsp-label">비밀번호 찾기</span>
                 </a>
-                <a href="#" class="quick-strip-item qs-qr">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14h2M14 19h2M19 19h2"/></svg>
-                    <span>공유창고 지점 출입 QR</span>
+                <a href="#" class="quick-strip-pill qs-qr">
+                    <span class="qsp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14h2M14 19h2M19 19h2"/></svg></span>
+                    <span class="qsp-label">출입 QR</span>
+                </a>
+                <a href="https://www.boxful.kr/product/" class="quick-strip-pill">
+                    <span class="qsp-icon"><img src="images/qs-self-storage.svg" alt="" loading="lazy"></span>
+                    <span class="qsp-label">셀프 공유창고</span>
+                </a>
+                <a href="https://www.boxful.kr/product/" class="quick-strip-pill">
+                    <span class="qsp-icon"><img src="images/qs-delivery-storage.svg" alt="" loading="lazy"></span>
+                    <span class="qsp-label">배송형 공유창고</span>
+                </a>
+                <a href="#svc-3pl" class="quick-strip-pill">
+                    <span class="qsp-icon"><img src="images/qs-mall-storage.svg" alt="" loading="lazy"></span>
+                    <span class="qsp-label">쇼핑몰 공유창고</span>
+                </a>
+                <a href="#svc-consignment" class="quick-strip-pill">
+                    <span class="qsp-icon"><img src="images/qs-consignment.svg" alt="" loading="lazy"></span>
+                    <span class="qsp-label">위탁판매</span>
+                </a>
+                <a href="#svc-gunpla" class="quick-strip-pill">
+                    <span class="qsp-icon"><img src="images/qs-gunpla.svg" alt="" loading="lazy"></span>
+                    <span class="qsp-label">건프라 도색룸</span>
+                </a>
+                <a href="#svc-boardgame" class="quick-strip-pill">
+                    <span class="qsp-icon"><img src="images/qs-boardgame.svg" alt="" loading="lazy"></span>
+                    <span class="qsp-label">보드게임룸</span>
+                </a>
+                <a href="#svc-psroom" class="quick-strip-pill">
+                    <span class="qsp-icon"><img src="images/qs-psroom.svg" alt="" loading="lazy"></span>
+                    <span class="qsp-label">PS룸</span>
                 </a>
             </div>
+            <button class="finder-nav next" id="qsNext" aria-label="다음">›</button>
         </div>
     </div>
 </section>
@@ -230,65 +263,6 @@
         </div>
         </div>
         <button class="finder-nav next" id="ssNext" aria-label="다음">›</button>
-        </div>
-    </div>
-</section>
-
-<!-- ==================== FINDER TEASER (boxful.kr section2 참고) ==================== -->
-<section class="finder-teaser section-pad" id="finder">
-    <div class="container-narrow">
-        <h2 class="section-title finder-title">셀프 공유창고 어디에 있나요?</h2>
-        <form class="hero-search" id="heroSearchForm" role="search">
-            <svg class="hero-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-            <input type="text" class="hero-search-input" id="heroSearchInput" placeholder="지역, 지점명으로 검색" autocomplete="off">
-            <button type="submit" class="btn btn-teal hero-search-btn">검색</button>
-        </form>
-        <div class="finder-filter-row">
-            <button class="finder-filter active">전체 지점</button>
-            <button class="finder-filter">서울</button>
-            <button class="finder-filter">경기</button>
-            <button class="finder-filter">인천</button>
-            <button class="finder-filter">세종</button>
-            <button class="finder-filter">경상도</button>
-            <button class="finder-filter">전라도</button>
-            <button class="finder-filter">강원도</button>
-            <button class="finder-filter">제주도</button>
-        </div>
-        <div class="finder-carousel-wrap">
-            <button class="finder-nav prev" id="finderPrev" aria-label="이전">‹</button>
-            <div class="finder-carousel" id="finderCarousel">
-                <div class="finder-card">
-                    <div class="finder-card-photo"><img src="images/stores/store_magok.png" alt="마곡 강서구 박스풀 공유창고" loading="lazy"></div>
-                    <h4>마곡 강서구 박스풀 공유창고 | Magok Boxful | Gangseo Declutter Service</h4>
-                    <p class="finder-card-price">0.5M 월 66,000원~</p>
-                </div>
-                <div class="finder-card">
-                    <div class="finder-card-photo"><img src="images/stores/store_yeonhui.png" alt="짐보관 서대문구 | 연희동 공유창고" loading="lazy"></div>
-                    <h4>짐보관 서대문구 | 연희동 공유창고<br>Yoenhui Self Storage</h4>
-                    <p class="finder-card-price">SB 월 30,000원~<br>0.5M 월 70,000원~</p>
-                </div>
-                <div class="finder-card">
-                    <div class="finder-card-photo"><img src="images/stores/store_yongsan.png" alt="용산점" loading="lazy"></div>
-                    <h4>용산점</h4>
-                    <p class="finder-card-price">박스보관 월 6,600원~<br>의류박스보관 월 20,000원~</p>
-                </div>
-                <div class="finder-card">
-                    <div class="finder-card-photo"><img src="images/stores/store_apgujeong.png" alt="압구정 현대아파트 공유창고" loading="lazy"></div>
-                    <h4>압구정 현대아파트 공유창고 | Apgujeong | Sinsa Declutter Service</h4>
-                    <p class="finder-card-price">SB 월 30,000원~<br>0.5M 월 100,000원~</p>
-                </div>
-                <div class="finder-card">
-                    <div class="finder-card-photo"><img src="images/stores/store_gyodae.png" alt="교대역 서초동 공유창고" loading="lazy"></div>
-                    <h4>교대역 서초동 공유창고 | Seocho Gangnam</h4>
-                    <p class="finder-card-price">SB 월 30,000원~</p>
-                </div>
-                <div class="finder-card">
-                    <div class="finder-card-photo"><img src="images/stores/store_gwangju.png" alt="광주 삼동역 공유창고" loading="lazy"></div>
-                    <h4>광주 삼동역 공유창고 | 경기도 짐보관 | Sungnam</h4>
-                    <p class="finder-card-price">0.5M 월 60,000원~<br>M 월 110,000원~</p>
-                </div>
-            </div>
-            <button class="finder-nav next" id="finderNext" aria-label="다음">›</button>
         </div>
     </div>
 </section>
@@ -427,6 +401,7 @@
     </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="js/script.js"></script>
 </body>
 </html>
