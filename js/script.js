@@ -100,34 +100,54 @@ document.addEventListener('DOMContentLoaded', () => {
        FINDER — Store Data + Region Filter + List Render
        (실제 지도 연동 시 각 항목의 lat/lng만 채우면 됨)
        ============================================= */
-    /* boxful.kr 실제 지점 API(api.boxful.kr/api/v1/store/list) 기준 실제 지점명·주소·좌표.
-       사진은 실제 6장만 있어서 나머지는 기존 사진 재사용, price는 실제 데이터가 없어 "이용료 문의"로 표기 */
-    /* services 값은 boxful.kr 실제 매장 API(store/list, product/locker/{id})의
-       products[].detail_type을 기준으로 검증한 값 — 대부분 매장은 셀프 공유창고만 제공.
-       특수 서비스(게임룸/보드게임룸/건프라조립룸/위탁판매/쇼핑몰 공유창고)는
-       실제로 용인시청 공유창고 단 한 곳에 몰려있고, 배송형 공유창고(박스보관/의류박스보관)만
-       일부 매장에 별도로 존재함. */
+    /* boxful.kr 실제 지점 API(api.boxful.kr/api/v1/store/list, product/locker/{id}) 전수 조사 기준 —
+       하노이 지점(해외) 1곳 제외 총 43개 지점 전부 반영. services는 products[].detail_type으로 검증:
+       storage-pickup-box=배송형 공유창고, b2b-warehouse=쇼핑몰 공유창고, consignment-sale=위탁판매,
+       additional-facilities=게임룸/보드게임룸/건프라 조립룸. district는 실제 주소에서 추출. */
     const finderStores = [
-        { name: '마곡 강서구 박스풀 공유창고', sub: 'Magok Boxful | Gangseo Declutter Service', region: '서울', district: '강서구', price: '0.5M 월 66,000원~', img: 'images/stores/store_magok.png', lat: 37.562865, lng: 126.823619, services: [] },
-        { name: '짐보관 서대문구 | 연희동 공유창고', sub: 'Yoenhui Self Storage', region: '서울', district: '서대문구', price: 'SB 월 30,000원~<br>0.5M 월 70,000원~', img: 'images/stores/store_yeonhui.png', lat: 37.5683597, lng: 126.9313351, services: [] },
-        { name: '용산점', sub: '', region: '서울', district: '용산구', price: '박스보관 월 6,600원~<br>의류박스보관 월 20,000원~', img: 'images/stores/store_yongsan.png', lat: 37.5397603, lng: 126.9625896, services: ['배송형 공유창고'] },
-        { name: '압구정 현대아파트 공유창고', sub: 'Apgujeong | Sinsa Declutter Service', region: '서울', district: '강남구', price: 'SB 월 30,000원~<br>0.5M 월 100,000원~', img: 'images/stores/store_apgujeong.png', lat: 37.5312143, lng: 127.0354395, services: [] },
-        { name: '역삼동 뱅뱅사거리 공유창고', sub: 'Yeoksam Declutter Service', region: '서울', district: '강남구', price: '이용료 문의', img: 'images/stores/store_apgujeong.png', lat: 37.4914889, lng: 127.0339855, services: [] },
-        { name: '언주역 공유창고', sub: 'Nonhyeon Self Storage', region: '서울', district: '강남구', price: '이용료 문의', img: 'images/stores/store_apgujeong.png', lat: 37.50777, lng: 127.032399, services: [] },
-        { name: '교대역 서초동 공유창고', sub: 'Seocho Gangnam', region: '서울', district: '서초구', price: 'SB 월 30,000원~', img: 'images/stores/store_gyodae.png', lat: 37.4975085, lng: 127.0131622, services: [] },
-        { name: '광주 삼동역 공유창고', sub: '경기도 짐보관 | Sungnam', region: '경기', district: '광주시', price: '0.5M 월 60,000원~<br>M 월 110,000원~', img: 'images/stores/store_gwangju.png', lat: 37.407129, lng: 127.206989, services: [] },
-        { name: '용인테크노밸리 공유창고', sub: 'Yongin Self Storage', region: '경기', district: '기흥구', price: '이용료 문의', img: 'images/stores/store_gwangju.png', lat: 37.291268, lng: 127.147953, services: [] },
-        { name: '수원 영통구 공유창고', sub: 'Suwon Self Storage', region: '경기', district: '영통구', price: '이용료 문의', img: 'images/stores/store_yongsan.png', lat: 37.260615, lng: 127.061435, services: [] },
-        { name: '인천계양 공유창고', sub: 'Incheon Self Storage', region: '인천', district: '계양구', price: '이용료 문의', img: 'images/stores/store_yeonhui.png', lat: 37.530076, lng: 126.708996, services: [] },
-        { name: '공유창고 세종점', sub: 'Sejong Self Storage', region: '세종', district: '세종시', price: '이용료 문의', img: 'images/stores/store_magok.png', lat: 36.5095, lng: 127.2625, services: [] },
-        { name: '경북대학교 공유창고', sub: 'Daegu Self Storage', region: '경상도', district: '대구 북구', price: '이용료 문의', img: 'images/stores/store_gyodae.png', lat: 35.886596, lng: 128.603519, services: ['게임룸', '배송형 공유창고'] },
-        { name: '공유창고 창원점', sub: 'Changwon Self Storage', region: '경상도', district: '창원시', price: '이용료 문의', img: 'images/stores/store_gwangju.png', lat: 35.2204589, lng: 128.679549, services: [] },
-        { name: '공유창고 전주점', sub: 'Jeonju Self Storage', region: '전라도', district: '전주시', price: '이용료 문의', img: 'images/stores/store_yongsan.png', lat: 35.816671, lng: 127.126046, services: [] },
-        { name: '공유창고 여수점', sub: 'Yeosu Self Storage', region: '전라도', district: '여수시', price: '이용료 문의', img: 'images/stores/store_magok.png', lat: 34.7735, lng: 127.6436, services: [] },
-        { name: '공유창고 원주역점', sub: 'Wonju Self Storage', region: '강원도', district: '원주시', price: '이용료 문의', img: 'images/stores/store_yeonhui.png', lat: 37.3197, lng: 127.9575, services: [] },
-        { name: '공유창고 제주동문시장점', sub: 'Jeju Self Storage', region: '제주도', district: '제주시', price: '이용료 문의', img: 'images/stores/store_apgujeong.png', lat: 33.513515, lng: 126.527376, services: [] },
-        { name: '함덕해수욕장 공유창고', sub: 'Jeju Self Storage', region: '제주도', district: '제주시', price: '이용료 문의', img: 'images/stores/store_gyodae.png', lat: 33.5353524, lng: 126.683263, services: [] },
-        { name: '용인시청 공유창고', sub: '처인구 짐보관 | Yongin Self Storage', region: '경기', district: '처인구', price: 'SB 월 30,000원~<br>0.5M 월 65,000원~', img: 'images/stores/store_gyodae.png', lat: 37.2395508, lng: 127.1572442, services: ['위탁판매', '쇼핑몰 공유창고', '게임룸', '보드게임룸', '건프라 조립룸'] },
+        { name: '역삼초교 공유창고', sub: '강남구 짐보관 | Gangnam Self storage', region: '서울', district: '강남구', price: 'SB 월 30,000원~', img: 'images/stores/store_magok.png', lat: 37.49382668642271, lng: 127.03371489468867, services: ['배송형 공유창고'] },
+        { name: '방이동 공유창고', sub: '잠실 짐보관 | Bangi Self storage', region: '서울', district: '송파구', price: '큐브 월 60,000원~', img: 'images/stores/store_yeonhui.png', lat: 37.511257, lng: 127.121281, services: [] },
+        { name: '공유창고 월촌역점', sub: '대구 짐보관 | 대구 무인창고', region: '경상도', district: '달서구', price: 'SB 월 30,000원~', img: 'images/stores/store_yongsan.png', lat: 35.822944, lng: 128.546322, services: [] },
+        { name: '언주역 공유창고', sub: '논현 짐보관 | Nonhyeon Self storage', region: '서울', district: '강남구', price: '스몰 월 115,000원~', img: 'images/stores/store_apgujeong.png', lat: 37.50777, lng: 127.032399, services: [] },
+        { name: '의왕 공유창고', sub: '안양구 짐보관 | Anyang Self storage', region: '경기', district: '의왕시', price: '스몰 월 89,000원~', img: 'images/stores/store_gwangju.png', lat: 37.3518385, lng: 126.9629215, services: [] },
+        { name: '인천계양 공유창고', sub: 'Incheon Self storage | 인천 짐보관', region: '인천', district: '계양구', price: '스몰 월 89,000원~', img: 'images/stores/store_gyodae.png', lat: 37.530076, lng: 126.708996, services: [] },
+        { name: '공유창고 봉천2호점', sub: '관안구 짐보관 | 당곡역 공유창고', region: '서울', district: '관악구', price: '스몰 월 118,800원~', img: 'images/stores/store_magok.png', lat: 37.490745, lng: 126.927022, services: [] },
+        { name: '역삼동 2호 공유창고', sub: '역삼 짐보관 | Yeoksam Self storage', region: '서울', district: '강남구', price: '스몰 월 120,000원~', img: 'images/stores/store_yeonhui.png', lat: 37.493207, lng: 127.031649, services: [] },
+        { name: '수원 영통구 공유창고', sub: 'Suwon Self storage | 경기도짐보관', region: '경기', district: '영통구', price: '스몰 월 79,000원~', img: 'images/stores/store_yongsan.png', lat: 37.260615, lng: 127.061435, services: [] },
+        { name: '제주이도 공유창고', sub: '연삼로 짐보관 | Ido Self storage', region: '제주도', district: '제주시', price: '큐브 월 77,000원~', img: 'images/stores/store_apgujeong.png', lat: 33.494202, lng: 126.533253, services: [] },
+        { name: '셀프 공유창고 경기광주점', sub: '판교 근처 창고 임대', region: '경기', district: '광주시', price: '스몰 월 77,000원~', img: 'images/stores/store_gwangju.png', lat: 37.407129, lng: 127.206989, services: ['배송형 공유창고'] },
+        { name: '경기도성남 세대창고 구입문의', sub: '무인매장 시스템', region: '경기', district: '광주시', price: '이용료 문의', img: 'images/stores/store_gyodae.png', lat: 37.4348061, lng: 127.221748, services: [] },
+        { name: '풍납동 짐보관', sub: '강동구 공유창고 | Pungnap Self storage', region: '서울', district: '송파구', price: '스몰 월 100,000원~', img: 'images/stores/store_magok.png', lat: 37.5282464, lng: 127.115442, services: [] },
+        { name: '부천 공유창고', sub: '오정구 짐보관 | Bucheon Self storage', region: '경기', district: '부천시', price: '세이프박스 월 30,000원~', img: 'images/stores/store_yeonhui.png', lat: 37.5189947, lng: 126.775634, services: [] },
+        { name: '연동 공유창고', sub: '제주연동 짐보관 | Jeju Self storage', region: '제주도', district: '제주시', price: '세이프박스 월 25,000원~', img: 'images/stores/store_yongsan.png', lat: 33.4825623, lng: 126.491208, services: [] },
+        { name: '함덕해수욕장 공유창고', sub: '제주시 짐보관 | Jeju Self storage', region: '제주도', district: '제주시', price: '세이프박스 월 20,000원~', img: 'images/stores/store_apgujeong.png', lat: 33.5353524, lng: 126.683263, services: [] },
+        { name: '아라동 짐보관', sub: '제주대학병원 공유창고 | Jeju Self storage', region: '제주도', district: '제주시', price: '세이프박스 월 25,000원~', img: 'images/stores/store_gwangju.png', lat: 33.4702245, lng: 126.548135, services: [] },
+        { name: '광교 공유창고', sub: 'Gwangyo Suwon Self storage | 수원짐보관', region: '경기', district: '수지구', price: '세이프박스 월 25,000원~', img: 'images/stores/store_gyodae.png', lat: 37.300365, lng: 127.071526, services: [] },
+        { name: '용인시청 공유창고', sub: '처인구 짐보관 | Yongin Self storage', region: '경기', district: '처인구', price: 'SB 월 30,000원~', img: 'images/stores/store_magok.png', lat: 37.2395508, lng: 127.1572442, services: ['쇼핑몰 공유창고', '위탁판매', '게임룸', '보드게임룸', '건프라 조립룸'] },
+        { name: '원흥역 짐보관', sub: '고양시 공유창고 | Goyang Self storage', region: '경기', district: '덕양구', price: 'SB 월 30,000원~', img: 'images/stores/store_yeonhui.png', lat: 37.6483967087209, lng: 126.8732438732838, services: [] },
+        { name: '기흥 공유창고', sub: '용인 짐보관 | Yongin Self storage', region: '경기', district: '기흥구', price: 'SB 월 30,000원~', img: 'images/stores/store_yongsan.png', lat: 37.25193606825369, lng: 127.12799948330593, services: [] },
+        { name: '공유창고 창원점', sub: '창원 짐보관 | Changwon Self storage', region: '경상도', district: '성산구', price: 'SB 월 30,000원~', img: 'images/stores/store_apgujeong.png', lat: 35.2204589, lng: 128.679549, services: [] },
+        { name: '셀프 공유창고 송파점', sub: 'Songpa Self storage', region: '서울', district: '송파구', price: 'SB 월 30,000원~', img: 'images/stores/store_gwangju.png', lat: 37.50196730941605, lng: 127.1109296746503, services: ['쇼핑몰 공유창고'] },
+        { name: '셀프 공유창고 용산점', sub: '', region: '서울', district: '용산구', price: '0.5M 월 66,000원~', img: 'images/stores/store_gyodae.png', lat: 37.5397603, lng: 126.9625896, services: ['배송형 공유창고'] },
+        { name: '짐보관 서대문구', sub: '연희동 공유창고 | Yoenhui Self Storage', region: '서울', district: '서대문구', price: 'SB 월 30,000원~', img: 'images/stores/store_magok.png', lat: 37.5683597, lng: 126.9313351, services: [] },
+        { name: '압구정 현대아파트 공유창고', sub: 'Apgujeong Self storage | Sinsa Declutter Service', region: '서울', district: '강남구', price: 'SB 월 30,000원~', img: 'images/stores/store_yeonhui.png', lat: 37.5312143, lng: 127.0354395, services: [] },
+        { name: '교대역 서초동 공유창고', sub: 'Seocho Self storage Gangam | トランクルーム', region: '서울', district: '서초구', price: 'SB 월 30,000원~', img: 'images/stores/store_yongsan.png', lat: 37.4975085, lng: 127.0131622, services: [] },
+        { name: '광주 삼동역 공유창고', sub: '경기도 짐보관 | Sungnam Self storage', region: '경기', district: '광주시', price: '0.5M 월 60,000원~', img: 'images/stores/store_apgujeong.png', lat: 37.407129, lng: 127.206989, services: [] },
+        { name: '역삼동 뱅뱅사거리 공유창고', sub: 'Dogok  Self storage | Yeoksam Declutter Service', region: '서울', district: '강남구', price: '0.5M 월 99,999원~', img: 'images/stores/store_gwangju.png', lat: 37.4914889, lng: 127.0339855, services: [] },
+        { name: '송파 문정동 공유창고', sub: 'Munjeong  Self storage | Songpa Declutter Service', region: '서울', district: '송파구', price: 'SB 월 30,000원~', img: 'images/stores/store_gyodae.png', lat: 37.4840131, lng: 127.1222271, services: [] },
+        { name: '마곡 강서구 박스풀 공유창고', sub: 'Magok Boxful Self storage | Gangseo Declutter Service', region: '서울', district: '강서구', price: '0.5M 월 66,000원~', img: 'images/stores/store_magok.png', lat: 37.562865, lng: 126.823619, services: [] },
+        { name: '경북대학교 공유창고', sub: '대구 북구 짐보관 | Daegu Self Storage', region: '경상도', district: '북구', price: '0.5S 월 44,000원~', img: 'images/stores/store_yeonhui.png', lat: 35.886596, lng: 128.603519, services: ['배송형 공유창고', '게임룸'] },
+        { name: '진주 공유창고', sub: '진주 짐보관 | Jinju Self Storage', region: '경상도', district: '진주시', price: 'SB 월 30,000원~', img: 'images/stores/store_yongsan.png', lat: 35.154375, lng: 128.117244, services: [] },
+        { name: '용인테크노밸리 공유창고', sub: '용인 짐보관 | Yongin Self storage', region: '경기', district: '기흥구', price: 'SB 월 300,000원~', img: 'images/stores/store_apgujeong.png', lat: 37.291268, lng: 127.147953, services: [] },
+        { name: '공유창고 제주동문시장점', sub: '제주도 이삿짐보관 | Jeju Self storage', region: '제주도', district: '제주시', price: 'SB 월 30,000원~', img: 'images/stores/store_gwangju.png', lat: 33.513515, lng: 126.527376, services: [] },
+        { name: '공유창고 대구역점', sub: '대구 짐보관 | Daegu Self Storage', region: '경상도', district: '북구', price: 'SB 월 30,000원~', img: 'images/stores/store_gyodae.png', lat: 35.87532, lng: 128.59997, services: ['배송형 공유창고'] },
+        { name: '공유창고 원주역점', sub: '원주역 짐보관 | Wonju Self Storage', region: '강원도', district: '원주시', price: '세이프박스 월 30,000원~', img: 'images/stores/store_magok.png', lat: 37.3197, lng: 127.9575, services: [] },
+        { name: '공유창고 전주점', sub: '전주 짐보관 | Jeonju Self Storage', region: '전라도', district: '완산구', price: '세이프박스 월 30,000원~', img: 'images/stores/store_yeonhui.png', lat: 35.816671, lng: 127.126046, services: [] },
+        { name: '공유창고 창원지방법원점', sub: '진주 짐보관 | Jinju Sinan Self Storage', region: '경상도', district: '진주시', price: 'SB 월 30,000원~', img: 'images/stores/store_yongsan.png', lat: 35.1916, lng: 128.0773, services: [] },
+        { name: '공유창고 대구본동점', sub: '대구 짐보관 | Daegu Bondong Self Storage', region: '경상도', district: '달서구', price: 'SB 월 30,000원~', img: 'images/stores/store_apgujeong.png', lat: 35.8363689, lng: 128.5374137, services: [] },
+        { name: '공유창고 김포한강점', sub: '김포 이삿짐보관 | Gimpo Hangang Self Storage', region: '경기', district: '김포시', price: '4M 월 330,000원~', img: 'images/stores/store_gwangju.png', lat: 37.65274636, lng: 126.619035348, services: [] },
+        { name: '공유창고 여수점', sub: '여수 짐보관 | Yeosu Self Storage', region: '전라도', district: '여수시', price: 'SB 월 30,000원~', img: 'images/stores/store_gyodae.png', lat: 34.7735, lng: 127.6436, services: [] },
+        { name: '공유창고 세종점', sub: '세종 짐보관 | Sejong Self Storage', region: '세종', district: '세종시', price: 'SB 월 30,000원~', img: 'images/stores/store_magok.png', lat: 36.5095, lng: 127.2625, services: [] },
     ];
     finderStores.forEach(s => s.services.unshift('셀프 공유창고'));
 
