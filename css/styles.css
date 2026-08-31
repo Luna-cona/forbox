@@ -164,22 +164,77 @@ img { display: block; max-width: 100%; }
     to   { background-position: -430px center; }
 }
 .hero-search {
-    display: flex; align-items: center; gap: 10px; max-width: 560px; margin: 0 auto 32px;
-    padding: 5px 5px 5px 20px; border-radius: 999px; border: 1.5px solid var(--border); background: var(--white);
+    display: flex; align-items: center; gap: 6px; max-width: 640px; margin: 0 auto 32px;
+    padding: 5px 5px 5px 5px; border-radius: 999px; border: 1.5px solid var(--border); background: var(--white);
     transition: var(--trans);
 }
 .hero-search:focus-within { border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-faint); }
-.hero-search-icon { width: 18px; height: 18px; color: var(--muted); flex-shrink: 0; }
+
+/* 서비스 선택 (아이콘+문구 커스텀 드롭다운) — 트리거와 패널 가로폭 고정, 항상 동일 */
+.hero-search-service { position: relative; flex-shrink: 0; width: 190px; }
+.hss-trigger {
+    display: flex; align-items: center; gap: 6px; width: 100%; box-sizing: border-box;
+    border: none; background: transparent; border-radius: 999px; cursor: pointer;
+    padding: 8px 8px 8px 14px; font-family: var(--font-kr); font-weight: 700; font-size: 0.95rem;
+    color: var(--text); transition: var(--trans);
+}
+.hss-trigger:hover, .hss-trigger[aria-expanded="true"] { background: var(--bg); }
+.hss-trigger-icon { width: 18px; height: 18px; flex-shrink: 0; display: flex; }
+.hss-trigger-icon img { width: 100%; height: 100%; }
+.hss-trigger-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hss-chevron-wrap {
+    display: flex; align-items: center; justify-content: center; width: 22px; height: 22px; flex-shrink: 0;
+    margin-left: auto; border-radius: 50%; background: var(--teal-faint); transition: var(--trans);
+}
+.hss-chevron { width: 14px; height: 14px; color: var(--teal); transition: var(--trans); }
+.hss-trigger[aria-expanded="true"] .hss-chevron-wrap { background: var(--teal); }
+.hss-trigger[aria-expanded="true"] .hss-chevron { color: var(--white); transform: rotate(180deg); }
+
+.hss-panel {
+    position: absolute; top: calc(100% + 10px); left: 0; z-index: 500;
+    width: 100%; box-sizing: border-box; max-width: calc(100vw - 48px); max-height: 320px; overflow-y: auto;
+    background: var(--white); border: 1px solid var(--border); border-radius: 16px;
+    box-shadow: var(--shadow); padding: 6px;
+}
+.hss-option {
+    display: flex; align-items: center; gap: 10px; width: 100%; border: none; background: none;
+    padding: 9px 10px; border-radius: 10px; font-family: var(--font-kr); font-weight: 600; font-size: 0.88rem;
+    color: var(--text); text-align: left; transition: var(--trans); white-space: nowrap; box-sizing: border-box;
+}
+.hss-option:hover { background: var(--teal-faint); }
+.hss-option.active { color: var(--teal); font-weight: 700; }
+.hss-option-all { margin-bottom: 4px; padding-bottom: 9px; border-bottom: 1px solid var(--border); border-radius: 10px 10px 0 0; }
+.hss-option-icon { width: 20px; height: 20px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.hss-option-icon img { width: 100%; height: 100%; }
+
+.hero-search-divider { width: 1px; height: 22px; background: var(--border); flex-shrink: 0; }
+.hero-search-icon { width: 18px; height: 18px; color: var(--muted); flex-shrink: 0; margin-left: 6px; }
 .hero-search-input {
-    flex: 1; min-width: 0; border: none; outline: none; background: none;
+    flex: 1; min-width: 60px; border: none; outline: none; background: none;
     font-family: var(--font-kr); font-size: 0.95rem; font-weight: 600; color: var(--text);
 }
 .hero-search-input::placeholder { color: var(--muted); font-weight: 500; }
 .hero-search-btn { flex-shrink: 0; padding: 9px 24px; }
 
 @media (max-width: 560px) {
-    .hero-search { max-width: 100%; padding: 4px 4px 4px 16px; }
-    .hero-search-btn { padding: 8px 16px; font-size: 0.9rem; }
+    .hero-search { max-width: 100%; padding: 4px; }
+    .hero-search-service { width: 120px; transition: width 0.25s ease; }
+    .hss-trigger { padding: 8px 4px 8px 8px; gap: 4px; font-size: 16px; }
+    .hss-trigger-label, .hss-chevron-wrap { transition: opacity 0.15s ease; }
+    .hss-option { white-space: normal; line-height: 1.3; }
+    .hero-search-icon { margin-left: 0; }
+    .hero-search-input { min-width: 36px; }
+    .hero-search-btn { padding: 8px 14px; font-size: 0.9rem; transition: width 0.25s ease, padding 0.25s ease, opacity 0.2s ease; }
+
+    /* 서비스 트리거를 열면 왼쪽이 넓어지고 오른쪽 입력/버튼은 자연스럽게 줄어듦 */
+    #heroSearchForm.hs-service-focus .hero-search-service { width: 210px; }
+    #heroSearchForm.hs-service-focus .hero-search-btn { width: 0; padding: 0; opacity: 0; overflow: hidden; }
+
+    /* 지역 입력창에 포커스하면 서비스 트리거는 아이콘만 남기고 줄어듦 */
+    #heroSearchForm.hs-input-focus .hero-search-service { width: 44px; }
+    #heroSearchForm.hs-input-focus .hss-trigger-label,
+    #heroSearchForm.hs-input-focus .hss-chevron-wrap { opacity: 0; width: 0; }
+    #heroSearchForm.hs-input-focus .hss-trigger { padding-right: 0; gap: 0; }
 }
 
 .hg-head { text-align: center; margin-bottom: 40px; }
@@ -393,11 +448,26 @@ img { display: block; max-width: 100%; }
 .finder-toolbar {
     display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 28px; flex-wrap: nowrap;
 }
+.finder-filter-wrap { position: relative; flex: 1; min-width: 0; }
 .finder-filter-row {
-    display: flex; gap: 8px; overflow-x: auto; flex: 1; min-width: 0;
+    display: flex; gap: 8px; overflow-x: auto;
     scrollbar-width: none; -ms-overflow-style: none;
 }
 .finder-filter-row::-webkit-scrollbar { display: none; }
+.finder-filter-fade {
+    position: absolute; top: 0; right: 0; bottom: 0; width: 36px;
+    background: linear-gradient(to right, rgba(255,255,255,0), var(--white));
+    pointer-events: none; opacity: 0; transition: var(--trans);
+}
+.finder-filter-fade.visible { opacity: 1; }
+.finder-filter-wrap .finder-nav {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+    width: 26px; height: 26px; font-size: 0.95rem; box-shadow: var(--shadow);
+    opacity: 0; pointer-events: none; transition: var(--trans);
+}
+.finder-filter-wrap .finder-nav.visible { opacity: 1; pointer-events: auto; }
+.finder-filter-wrap .finder-nav.prev { left: -6px; }
+.finder-filter-wrap .finder-nav.next { right: -6px; }
 .finder-filter {
     flex-shrink: 0; padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--border);
     font-weight: 700; font-size: 0.82rem; color: var(--muted); background: var(--white); transition: var(--trans);
@@ -438,10 +508,17 @@ img { display: block; max-width: 100%; }
 }
 
 .finder-split { display: flex; gap: 24px; align-items: flex-start; }
+.finder-list-wrap { flex: 1 1 45%; min-width: 0; position: relative; }
 .finder-list {
-    flex: 1 1 45%; min-width: 0; display: flex; flex-direction: column; gap: 12px;
+    display: flex; flex-direction: column; gap: 12px;
     max-height: 560px; overflow-y: auto; padding-right: 4px;
 }
+.finder-list-fade {
+    position: absolute; left: 0; right: 4px; bottom: 0; height: 48px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), var(--white));
+    pointer-events: none; opacity: 0; transition: var(--trans);
+}
+.finder-list-fade.visible { opacity: 1; }
 .finder-list-item {
     display: flex; gap: 14px; padding: 12px; border: 1px solid var(--border); border-radius: 14px;
     transition: var(--trans);
@@ -458,7 +535,7 @@ img { display: block; max-width: 100%; }
 .finder-empty { padding: 40px 12px; text-align: center; color: var(--muted); font-size: 0.9rem; }
 
 .finder-map-canvas {
-    flex: 1 1 55%; min-height: 560px; border-radius: 20px; background: var(--bg);
+    position: relative; z-index: 0; flex: 1 1 55%; min-height: 560px; border-radius: 20px; background: var(--bg);
     border: 1px solid var(--border); overflow: hidden;
 }
 .finder-map-canvas .leaflet-popup-content-wrapper { border-radius: 12px; }
@@ -483,7 +560,8 @@ img { display: block; max-width: 100%; }
 
 @media (max-width: 760px) {
     .finder-split { flex-direction: column; }
-    .finder-list { max-height: none; overflow-y: visible; width: 100%; order: 2; }
+    .finder-list-wrap { width: 100%; order: 2; }
+    .finder-list { max-height: 340px; overflow-y: auto; width: 100%; }
     .finder-map-canvas { width: 100%; min-height: 260px; order: 1; }
 }
 

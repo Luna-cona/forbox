@@ -102,34 +102,46 @@ document.addEventListener('DOMContentLoaded', () => {
        ============================================= */
     /* boxful.kr 실제 지점 API(api.boxful.kr/api/v1/store/list) 기준 실제 지점명·주소·좌표.
        사진은 실제 6장만 있어서 나머지는 기존 사진 재사용, price는 실제 데이터가 없어 "이용료 문의"로 표기 */
+    /* services 값은 boxful.kr 실제 매장 API(store/list, product/locker/{id})의
+       products[].detail_type을 기준으로 검증한 값 — 대부분 매장은 셀프 공유창고만 제공.
+       특수 서비스(게임룸/보드게임룸/건프라조립룸/위탁판매/쇼핑몰 공유창고)는
+       실제로 용인시청 공유창고 단 한 곳에 몰려있고, 배송형 공유창고(박스보관/의류박스보관)만
+       일부 매장에 별도로 존재함. */
     const finderStores = [
-        { name: '마곡 강서구 박스풀 공유창고', sub: 'Magok Boxful | Gangseo Declutter Service', region: '서울', district: '강서구', price: '0.5M 월 66,000원~', img: 'images/stores/store_magok.png', lat: 37.562865, lng: 126.823619 },
-        { name: '짐보관 서대문구 | 연희동 공유창고', sub: 'Yoenhui Self Storage', region: '서울', district: '서대문구', price: 'SB 월 30,000원~<br>0.5M 월 70,000원~', img: 'images/stores/store_yeonhui.png', lat: 37.5683597, lng: 126.9313351 },
-        { name: '용산점', sub: '', region: '서울', district: '용산구', price: '박스보관 월 6,600원~<br>의류박스보관 월 20,000원~', img: 'images/stores/store_yongsan.png', lat: 37.5397603, lng: 126.9625896 },
-        { name: '압구정 현대아파트 공유창고', sub: 'Apgujeong | Sinsa Declutter Service', region: '서울', district: '강남구', price: 'SB 월 30,000원~<br>0.5M 월 100,000원~', img: 'images/stores/store_apgujeong.png', lat: 37.5312143, lng: 127.0354395 },
-        { name: '역삼동 뱅뱅사거리 공유창고', sub: 'Yeoksam Declutter Service', region: '서울', district: '강남구', price: '이용료 문의', img: 'images/stores/store_apgujeong.png', lat: 37.4914889, lng: 127.0339855 },
-        { name: '언주역 공유창고', sub: 'Nonhyeon Self Storage', region: '서울', district: '강남구', price: '이용료 문의', img: 'images/stores/store_apgujeong.png', lat: 37.50777, lng: 127.032399 },
-        { name: '교대역 서초동 공유창고', sub: 'Seocho Gangnam', region: '서울', district: '서초구', price: 'SB 월 30,000원~', img: 'images/stores/store_gyodae.png', lat: 37.4975085, lng: 127.0131622 },
-        { name: '광주 삼동역 공유창고', sub: '경기도 짐보관 | Sungnam', region: '경기', district: '광주시', price: '0.5M 월 60,000원~<br>M 월 110,000원~', img: 'images/stores/store_gwangju.png', lat: 37.407129, lng: 127.206989 },
-        { name: '용인테크노밸리 공유창고', sub: 'Yongin Self Storage', region: '경기', district: '기흥구', price: '이용료 문의', img: 'images/stores/store_gwangju.png', lat: 37.291268, lng: 127.147953 },
-        { name: '수원 영통구 공유창고', sub: 'Suwon Self Storage', region: '경기', district: '영통구', price: '이용료 문의', img: 'images/stores/store_yongsan.png', lat: 37.260615, lng: 127.061435 },
-        { name: '인천계양 공유창고', sub: 'Incheon Self Storage', region: '인천', district: '계양구', price: '이용료 문의', img: 'images/stores/store_yeonhui.png', lat: 37.530076, lng: 126.708996 },
-        { name: '공유창고 세종점', sub: 'Sejong Self Storage', region: '세종', district: '세종시', price: '이용료 문의', img: 'images/stores/store_magok.png', lat: 36.5095, lng: 127.2625 },
-        { name: '경북대학교 공유창고', sub: 'Daegu Self Storage', region: '경상도', district: '대구 북구', price: '이용료 문의', img: 'images/stores/store_gyodae.png', lat: 35.886596, lng: 128.603519 },
-        { name: '공유창고 창원점', sub: 'Changwon Self Storage', region: '경상도', district: '창원시', price: '이용료 문의', img: 'images/stores/store_gwangju.png', lat: 35.2204589, lng: 128.679549 },
-        { name: '공유창고 전주점', sub: 'Jeonju Self Storage', region: '전라도', district: '전주시', price: '이용료 문의', img: 'images/stores/store_yongsan.png', lat: 35.816671, lng: 127.126046 },
-        { name: '공유창고 여수점', sub: 'Yeosu Self Storage', region: '전라도', district: '여수시', price: '이용료 문의', img: 'images/stores/store_magok.png', lat: 34.7735, lng: 127.6436 },
-        { name: '공유창고 원주역점', sub: 'Wonju Self Storage', region: '강원도', district: '원주시', price: '이용료 문의', img: 'images/stores/store_yeonhui.png', lat: 37.3197, lng: 127.9575 },
-        { name: '공유창고 제주동문시장점', sub: 'Jeju Self Storage', region: '제주도', district: '제주시', price: '이용료 문의', img: 'images/stores/store_apgujeong.png', lat: 33.513515, lng: 126.527376 },
-        { name: '함덕해수욕장 공유창고', sub: 'Jeju Self Storage', region: '제주도', district: '제주시', price: '이용료 문의', img: 'images/stores/store_gyodae.png', lat: 33.5353524, lng: 126.683263 },
+        { name: '마곡 강서구 박스풀 공유창고', sub: 'Magok Boxful | Gangseo Declutter Service', region: '서울', district: '강서구', price: '0.5M 월 66,000원~', img: 'images/stores/store_magok.png', lat: 37.562865, lng: 126.823619, services: [] },
+        { name: '짐보관 서대문구 | 연희동 공유창고', sub: 'Yoenhui Self Storage', region: '서울', district: '서대문구', price: 'SB 월 30,000원~<br>0.5M 월 70,000원~', img: 'images/stores/store_yeonhui.png', lat: 37.5683597, lng: 126.9313351, services: [] },
+        { name: '용산점', sub: '', region: '서울', district: '용산구', price: '박스보관 월 6,600원~<br>의류박스보관 월 20,000원~', img: 'images/stores/store_yongsan.png', lat: 37.5397603, lng: 126.9625896, services: ['배송형 공유창고'] },
+        { name: '압구정 현대아파트 공유창고', sub: 'Apgujeong | Sinsa Declutter Service', region: '서울', district: '강남구', price: 'SB 월 30,000원~<br>0.5M 월 100,000원~', img: 'images/stores/store_apgujeong.png', lat: 37.5312143, lng: 127.0354395, services: [] },
+        { name: '역삼동 뱅뱅사거리 공유창고', sub: 'Yeoksam Declutter Service', region: '서울', district: '강남구', price: '이용료 문의', img: 'images/stores/store_apgujeong.png', lat: 37.4914889, lng: 127.0339855, services: [] },
+        { name: '언주역 공유창고', sub: 'Nonhyeon Self Storage', region: '서울', district: '강남구', price: '이용료 문의', img: 'images/stores/store_apgujeong.png', lat: 37.50777, lng: 127.032399, services: [] },
+        { name: '교대역 서초동 공유창고', sub: 'Seocho Gangnam', region: '서울', district: '서초구', price: 'SB 월 30,000원~', img: 'images/stores/store_gyodae.png', lat: 37.4975085, lng: 127.0131622, services: [] },
+        { name: '광주 삼동역 공유창고', sub: '경기도 짐보관 | Sungnam', region: '경기', district: '광주시', price: '0.5M 월 60,000원~<br>M 월 110,000원~', img: 'images/stores/store_gwangju.png', lat: 37.407129, lng: 127.206989, services: [] },
+        { name: '용인테크노밸리 공유창고', sub: 'Yongin Self Storage', region: '경기', district: '기흥구', price: '이용료 문의', img: 'images/stores/store_gwangju.png', lat: 37.291268, lng: 127.147953, services: [] },
+        { name: '수원 영통구 공유창고', sub: 'Suwon Self Storage', region: '경기', district: '영통구', price: '이용료 문의', img: 'images/stores/store_yongsan.png', lat: 37.260615, lng: 127.061435, services: [] },
+        { name: '인천계양 공유창고', sub: 'Incheon Self Storage', region: '인천', district: '계양구', price: '이용료 문의', img: 'images/stores/store_yeonhui.png', lat: 37.530076, lng: 126.708996, services: [] },
+        { name: '공유창고 세종점', sub: 'Sejong Self Storage', region: '세종', district: '세종시', price: '이용료 문의', img: 'images/stores/store_magok.png', lat: 36.5095, lng: 127.2625, services: [] },
+        { name: '경북대학교 공유창고', sub: 'Daegu Self Storage', region: '경상도', district: '대구 북구', price: '이용료 문의', img: 'images/stores/store_gyodae.png', lat: 35.886596, lng: 128.603519, services: ['게임룸', '배송형 공유창고'] },
+        { name: '공유창고 창원점', sub: 'Changwon Self Storage', region: '경상도', district: '창원시', price: '이용료 문의', img: 'images/stores/store_gwangju.png', lat: 35.2204589, lng: 128.679549, services: [] },
+        { name: '공유창고 전주점', sub: 'Jeonju Self Storage', region: '전라도', district: '전주시', price: '이용료 문의', img: 'images/stores/store_yongsan.png', lat: 35.816671, lng: 127.126046, services: [] },
+        { name: '공유창고 여수점', sub: 'Yeosu Self Storage', region: '전라도', district: '여수시', price: '이용료 문의', img: 'images/stores/store_magok.png', lat: 34.7735, lng: 127.6436, services: [] },
+        { name: '공유창고 원주역점', sub: 'Wonju Self Storage', region: '강원도', district: '원주시', price: '이용료 문의', img: 'images/stores/store_yeonhui.png', lat: 37.3197, lng: 127.9575, services: [] },
+        { name: '공유창고 제주동문시장점', sub: 'Jeju Self Storage', region: '제주도', district: '제주시', price: '이용료 문의', img: 'images/stores/store_apgujeong.png', lat: 33.513515, lng: 126.527376, services: [] },
+        { name: '함덕해수욕장 공유창고', sub: 'Jeju Self Storage', region: '제주도', district: '제주시', price: '이용료 문의', img: 'images/stores/store_gyodae.png', lat: 33.5353524, lng: 126.683263, services: [] },
+        { name: '용인시청 공유창고', sub: '처인구 짐보관 | Yongin Self Storage', region: '경기', district: '처인구', price: 'SB 월 30,000원~<br>0.5M 월 65,000원~', img: 'images/stores/store_gyodae.png', lat: 37.2395508, lng: 127.1572442, services: ['위탁판매', '쇼핑몰 공유창고', '게임룸', '보드게임룸', '건프라 조립룸'] },
     ];
+    finderStores.forEach(s => s.services.unshift('셀프 공유창고'));
 
     const finderList = document.getElementById('finderList');
+    const finderListFade = document.getElementById('finderListFade');
     const finderCarousel = document.getElementById('finderCarousel');
     const finderMapEl = document.getElementById('finderMap');
 
+    finderList?.addEventListener('scroll', () => updateFinderListFade(), { passive: true });
+    window.addEventListener('resize', () => updateFinderListFade());
+
     let finderRegion = 'all';
     let finderQuery = '';
+    let finderServices = [];
     let leafletMap = null;
     let leafletMarkers = [];
 
@@ -168,7 +180,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 (s.district && s.district.toLowerCase().includes(q))
             );
         }
+        if (finderServices.length) {
+            stores = stores.filter(s => finderServices.some(svc => (s.services || []).includes(svc)));
+        }
         return stores;
+    }
+
+    function updateFinderListFade() {
+        if (!finderList || !finderListFade) return;
+        const hasMoreBelow = finderList.scrollHeight - finderList.scrollTop - finderList.clientHeight > 4;
+        finderListFade.classList.toggle('visible', hasMoreBelow);
     }
 
     function renderFinderList() {
@@ -183,6 +204,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `).join('') : `<p class="finder-empty">검색 결과가 없습니다</p>`;
+        finderList.scrollTop = 0;
+        updateFinderListFade();
     }
 
     function renderFinderCarousel() {
@@ -307,6 +330,73 @@ document.addEventListener('DOMContentLoaded', () => {
             finderRegion = filter.dataset.region;
             renderFinder();
         });
+    });
+
+    /* 지역 필터 행 — 가로 스크롤 가능함을 알려주는 페이드 + 화살표 (모바일에서도 항상 노출) */
+    const finderFilterRow = document.getElementById('finderFilterRow');
+    const finderFilterFade = document.getElementById('finderFilterFade');
+    const finderFilterPrev = document.getElementById('finderFilterPrev');
+    const finderFilterNext = document.getElementById('finderFilterNext');
+
+    function updateFinderFilterNav() {
+        if (!finderFilterRow) return;
+        const maxScroll = finderFilterRow.scrollWidth - finderFilterRow.clientWidth;
+        const hasOverflow = maxScroll > 4;
+        finderFilterPrev?.classList.toggle('visible', hasOverflow && finderFilterRow.scrollLeft > 4);
+        const hasMoreRight = hasOverflow && finderFilterRow.scrollLeft < maxScroll - 4;
+        finderFilterNext?.classList.toggle('visible', hasMoreRight);
+        finderFilterFade?.classList.toggle('visible', hasMoreRight);
+    }
+    finderFilterRow?.addEventListener('scroll', updateFinderFilterNav, { passive: true });
+    window.addEventListener('resize', updateFinderFilterNav);
+    finderFilterPrev?.addEventListener('click', () => finderFilterRow.scrollBy({ left: -160, behavior: 'smooth' }));
+    finderFilterNext?.addEventListener('click', () => finderFilterRow.scrollBy({ left: 160, behavior: 'smooth' }));
+    requestAnimationFrame(updateFinderFilterNav);
+
+    /* 서비스 종류 필터 (검색바 내 아이콘+문구 커스텀 드롭다운, 단일 선택) */
+    const hssTrigger = document.getElementById('hssTrigger');
+    const hssPanel = document.getElementById('hssPanel');
+    const hssTriggerIcon = document.getElementById('hssTriggerIcon');
+    const hssTriggerLabel = document.getElementById('hssTriggerLabel');
+    const hssOptions = document.querySelectorAll('.hss-option');
+
+    function closeHssPanel() {
+        hssPanel?.setAttribute('hidden', '');
+        hssTrigger?.setAttribute('aria-expanded', 'false');
+        document.getElementById('heroSearchForm')?.classList.remove('hs-service-focus');
+    }
+    function openHssPanel() {
+        hssPanel?.removeAttribute('hidden');
+        hssTrigger?.setAttribute('aria-expanded', 'true');
+        document.getElementById('heroSearchForm')?.classList.add('hs-service-focus');
+    }
+
+    hssTrigger?.addEventListener('click', () => {
+        const isOpen = hssTrigger.getAttribute('aria-expanded') === 'true';
+        isOpen ? closeHssPanel() : openHssPanel();
+    });
+
+    hssOptions.forEach(opt => {
+        opt.addEventListener('click', () => {
+            const value = opt.dataset.value;
+            const iconSrc = opt.querySelector('.hss-option-icon img')?.getAttribute('src') || '';
+            hssTriggerIcon.innerHTML = iconSrc ? `<img src="${iconSrc}" alt="" loading="lazy">` : '';
+            hssTriggerLabel.textContent = opt.querySelector('span:last-child').textContent;
+            hssOptions.forEach(o => {
+                o.classList.toggle('active', o === opt);
+                o.setAttribute('aria-selected', o === opt ? 'true' : 'false');
+            });
+            finderServices = value ? [value] : [];
+            closeHssPanel();
+            renderFinder();
+        });
+    });
+
+    document.addEventListener('click', e => {
+        if (!e.target.closest('.hero-search-service')) closeHssPanel();
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeHssPanel();
     });
 
     renderFinder();
@@ -527,6 +617,10 @@ document.addEventListener('DOMContentLoaded', () => {
        ============================================= */
     const heroSearchForm = document.getElementById('heroSearchForm');
     const heroSearchInput = document.getElementById('heroSearchInput');
+
+    /* 모바일: 지역 입력창에 포커스하면 서비스 트리거는 아이콘만 남기고 줄어들어 입력창에 공간을 더 줌 */
+    heroSearchInput?.addEventListener('focus', () => heroSearchForm?.classList.add('hs-input-focus'));
+    heroSearchInput?.addEventListener('blur', () => heroSearchForm?.classList.remove('hs-input-focus'));
 
     heroSearchForm?.addEventListener('submit', e => {
         e.preventDefault();

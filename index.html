@@ -68,21 +68,63 @@
     <div class="container-narrow">
         <h2 class="section-title finder-title">가까운 박스풀 공간을 찾아보세요</h2>
         <form class="hero-search" id="heroSearchForm" role="search">
+            <div class="hero-search-service" id="heroSearchService">
+                <button type="button" class="hss-trigger" id="hssTrigger" aria-haspopup="listbox" aria-expanded="false">
+                    <span class="hss-trigger-icon" id="hssTriggerIcon"></span>
+                    <span class="hss-trigger-label" id="hssTriggerLabel">전체 서비스</span>
+                    <span class="hss-chevron-wrap">
+                        <svg class="hss-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </span>
+                </button>
+                <div class="hss-panel" id="hssPanel" role="listbox" hidden>
+                    <button type="button" class="hss-option hss-option-all active" data-value="" role="option" aria-selected="true">
+                        <span>전체 서비스</span>
+                    </button>
+                    <button type="button" class="hss-option" data-value="셀프 공유창고" role="option" aria-selected="false">
+                        <span class="hss-option-icon"><img src="images/qs-self-storage.svg" alt="" loading="lazy"></span><span>셀프 공유창고</span>
+                    </button>
+                    <button type="button" class="hss-option" data-value="배송형 공유창고" role="option" aria-selected="false">
+                        <span class="hss-option-icon"><img src="images/qs-delivery-storage.svg" alt="" loading="lazy"></span><span>배송형 공유창고</span>
+                    </button>
+                    <button type="button" class="hss-option" data-value="쇼핑몰 공유창고" role="option" aria-selected="false">
+                        <span class="hss-option-icon"><img src="images/qs-mall-storage.svg" alt="" loading="lazy"></span><span>쇼핑몰 공유창고</span>
+                    </button>
+                    <button type="button" class="hss-option" data-value="위탁판매" role="option" aria-selected="false">
+                        <span class="hss-option-icon"><img src="images/qs-consignment.svg" alt="" loading="lazy"></span><span>위탁판매</span>
+                    </button>
+                    <button type="button" class="hss-option" data-value="게임룸" role="option" aria-selected="false">
+                        <span class="hss-option-icon"><img src="images/qs-psroom.svg" alt="" loading="lazy"></span><span>게임룸</span>
+                    </button>
+                    <button type="button" class="hss-option" data-value="보드게임룸" role="option" aria-selected="false">
+                        <span class="hss-option-icon"><img src="images/qs-boardgame.svg" alt="" loading="lazy"></span><span>보드게임룸</span>
+                    </button>
+                    <button type="button" class="hss-option" data-value="건프라 조립룸" role="option" aria-selected="false">
+                        <span class="hss-option-icon"><img src="images/qs-gunpla.svg" alt="" loading="lazy"></span><span>건프라 조립룸</span>
+                    </button>
+                </div>
+            </div>
+            <span class="hero-search-divider"></span>
             <svg class="hero-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
             <input type="text" class="hero-search-input" id="heroSearchInput" placeholder="지역, 지점명으로 검색" autocomplete="off">
             <button type="submit" class="btn btn-teal hero-search-btn">검색</button>
         </form>
+
         <div class="finder-toolbar">
-            <div class="finder-filter-row">
-                <button class="finder-filter active" data-region="all">전체 지점</button>
-                <button class="finder-filter" data-region="서울">서울</button>
-                <button class="finder-filter" data-region="경기">경기</button>
-                <button class="finder-filter" data-region="인천">인천</button>
-                <button class="finder-filter" data-region="세종">세종</button>
-                <button class="finder-filter" data-region="경상도">경상도</button>
-                <button class="finder-filter" data-region="전라도">전라도</button>
-                <button class="finder-filter" data-region="강원도">강원도</button>
-                <button class="finder-filter" data-region="제주도">제주도</button>
+            <div class="finder-filter-wrap">
+                <div class="finder-filter-row" id="finderFilterRow">
+                    <button class="finder-filter active" data-region="all">전체 지점</button>
+                    <button class="finder-filter" data-region="서울">서울</button>
+                    <button class="finder-filter" data-region="경기">경기</button>
+                    <button class="finder-filter" data-region="인천">인천</button>
+                    <button class="finder-filter" data-region="세종">세종</button>
+                    <button class="finder-filter" data-region="경상도">경상도</button>
+                    <button class="finder-filter" data-region="전라도">전라도</button>
+                    <button class="finder-filter" data-region="강원도">강원도</button>
+                    <button class="finder-filter" data-region="제주도">제주도</button>
+                </div>
+                <div class="finder-filter-fade" id="finderFilterFade"></div>
+                <button class="finder-nav prev" id="finderFilterPrev" type="button" aria-label="이전 지역">‹</button>
+                <button class="finder-nav next" id="finderFilterNext" type="button" aria-label="다음 지역">›</button>
             </div>
             <button class="finder-view-toggle" id="finderViewToggle" type="button" aria-label="목록으로 보기">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
@@ -100,7 +142,10 @@
 
         <div class="finder-view finder-view-map active" id="finderViewMap">
             <div class="finder-split">
-                <div class="finder-list" id="finderList"></div>
+                <div class="finder-list-wrap">
+                    <div class="finder-list" id="finderList"></div>
+                    <div class="finder-list-fade" id="finderListFade"></div>
+                </div>
                 <div class="finder-map-canvas" id="finderMap"></div>
             </div>
         </div>
