@@ -269,37 +269,37 @@ img { display: block; max-width: 100%; }
 .quick-strip { padding: 20px 0; }
 .quick-strip[hidden] { display: none; }
 
-/* 이용 중 고객용 버튼: 별도 섹션, 가운데 정렬 (사각형이지만 원본 색상·hover 유지) */
+/* 이용 중 고객용 버튼: 원형 아이콘 + 2줄 라벨, 4개 한 줄 (원본 색상·hover 유지) */
 .util-strip { padding: 24px 0; }
 .util-strip-title { text-align: center; font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: 18px; }
 .quick-strip-utils {
     display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px; max-width: 720px; margin: 0 auto;
+    gap: 12px; max-width: 460px; margin: 0 auto;
 }
 .qs-util-btn {
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
-    padding: 22px 12px; border-radius: 14px;
-    border: 1px solid transparent; white-space: nowrap;
-    font-weight: 700; font-size: 0.88rem; transition: var(--trans);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
 }
-.qs-util-btn svg { width: 24px; height: 24px; transition: var(--trans); }
-.qs-util-password { background: #fdf3d9; color: #c8942b; }
-.qs-util-password svg { color: #c8942b; }
-.qs-util-qr { background: #e4f3d4; color: #5a9a2f; }
-.qs-util-qr svg { color: #5a9a2f; }
-.qs-util-kakao { background: #fee500; color: #191919; }
-.qs-util-kakao svg { color: #191919; }
-.qs-util-chat { background: var(--teal-faint); color: var(--teal-dark); }
-.qs-util-chat svg { color: var(--teal-dark); }
-.qs-util-btn:hover { background: var(--teal); border-color: var(--teal); color: var(--white); }
-.qs-util-btn:hover svg { color: var(--white); }
-@media (max-width: 720px) {
-    .qs-util-btn { padding: 18px 8px; font-size: 0.82rem; gap: 8px; }
-    .qs-util-btn svg { width: 22px; height: 22px; }
+.qs-util-ico {
+    display: flex; align-items: center; justify-content: center;
+    width: 52px; height: 52px; border-radius: 50%; transition: var(--trans);
 }
-@media (max-width: 560px) {
-    .quick-strip-utils { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .qs-util-btn { padding: 20px 12px; font-size: 0.84rem; }
+.qs-util-ico svg { width: 22px; height: 22px; }
+.qs-util-label {
+    font-size: 0.76rem; font-weight: 700; text-align: center;
+    line-height: 1.3; color: var(--text); transition: var(--trans);
+}
+.qs-util-password .qs-util-ico { background: #fdf3d9; color: #c8942b; }
+.qs-util-qr .qs-util-ico { background: #e4f3d4; color: #5a9a2f; }
+.qs-util-kakao .qs-util-ico { background: #fee500; color: #191919; }
+.qs-util-chat .qs-util-ico { background: var(--teal-faint); color: var(--teal-dark); }
+.qs-util-btn:hover .qs-util-ico { background: var(--teal); color: var(--white); }
+.qs-util-btn:hover .qs-util-label { color: var(--teal); }
+
+@media (max-width: 480px) {
+    .quick-strip-utils { gap: 8px; }
+    .qs-util-ico { width: 46px; height: 46px; }
+    .qs-util-ico svg { width: 20px; height: 20px; }
+    .qs-util-label { font-size: 0.7rem; }
 }
 
 .quick-strip-head { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; margin-bottom: 20px; }
