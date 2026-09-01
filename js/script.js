@@ -615,22 +615,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* =============================================
-       SCENARIOS — Persona Tabs
+       SCENARIOS — Use case rotating stage
        ============================================= */
-    const stabs = document.querySelectorAll('.stab');
-    const spanels = document.querySelectorAll('.spanel');
+    const ucStage = document.querySelector('.uc-stage');
 
-    stabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            stabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
+    if (ucStage) {
+        const ucSlides = Array.from(ucStage.querySelectorAll('.uc-slide'));
+        const ucDots = Array.from(ucStage.querySelectorAll('.uc-dot'));
+        const ucReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const UC_DELAY = 4000;
+        let ucIdx = 0;
+        let ucTimer = null;
 
-            const persona = tab.dataset.persona;
-            spanels.forEach(panel => {
-                panel.classList.toggle('active', panel.dataset.persona === persona);
-            });
-        });
-    });
+        const ucGo = i => {
+            ucIdx = (i + ucSlides.length) % ucSlides.length;
+            ucSlides.forEach((s, n) => s.classList.toggle('active', n === ucIdx));
+            ucDots.forEach((d, n) => d.classList.toggle('active', n === ucIdx));
+        };
+        const ucStop = () => { if (ucTimer) { clearInterval(ucTimer); ucTimer = null; } };
+        const ucStart = () => {
+            ucStop();
+            if (!ucReduce) ucTimer = setInterval(() => ucGo(ucIdx + 1), UC_DELAY);
+        };
+
+        ucDots.forEach((d, n) => d.addEventListener('click', () => { ucGo(n); ucStart(); }));
+        ucStage.addEventListener('mouseenter', ucStop);
+        ucStage.addEventListener('mouseleave', ucStart);
+        ucStart();
+    }
 
     /* =============================================
        FINDER — Search Bar

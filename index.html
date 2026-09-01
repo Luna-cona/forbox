@@ -152,8 +152,33 @@
     </div>
 </section>
 
+<!-- ==================== UTIL STRIP (이용 중 고객) ==================== -->
+<section class="util-strip">
+    <div class="container-narrow">
+        <p class="util-strip-title">도움이 필요하신가요?</p>
+        <div class="quick-strip-utils">
+            <a href="#" class="qs-util-btn qs-util-password">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                <span>비밀번호 찾기</span>
+            </a>
+            <a href="#" class="qs-util-btn qs-util-qr">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14h2M14 19h2M19 19h2"/></svg>
+                <span>출입 QR</span>
+            </a>
+            <a href="#" class="qs-util-btn qs-util-kakao">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-3-.5L4 21l1.3-4.4A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 12.5 3 8.5 8.5 0 0 1 21 11.5z"/></svg>
+                <span>카카오톡 상담하기</span>
+            </a>
+            <a href="#" class="qs-util-btn qs-util-chat">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 13v-2a8 8 0 0 1 16 0v2"/><path d="M4 14a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2z"/><path d="M20 14a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2 2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2z"/><path d="M12 20h3"/></svg>
+                <span>실시간 상담하기</span>
+            </a>
+        </div>
+    </div>
+</section>
+
 <!-- ==================== QUICK SERVICE STRIP ==================== -->
-<section class="quick-strip">
+<section class="quick-strip" hidden>
     <div class="container-narrow">
         <div class="quick-strip-head">
             <span class="section-label">SERVICE BOARD</span>
@@ -162,14 +187,6 @@
         <div class="quick-strip-row-wrap">
             <button class="finder-nav prev" id="qsPrev" aria-label="이전">‹</button>
             <div class="quick-strip-row" id="qsTrack">
-                <a href="#" class="quick-strip-pill qs-password">
-                    <span class="qsp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
-                    <span class="qsp-label">비밀번호 찾기</span>
-                </a>
-                <a href="#" class="quick-strip-pill qs-qr">
-                    <span class="qsp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14h2M14 19h2M19 19h2"/></svg></span>
-                    <span class="qsp-label">출입 QR</span>
-                </a>
                 <a href="https://www.boxful.kr/product/" class="quick-strip-pill">
                     <span class="qsp-icon"><img src="images/qs-self-storage.svg" alt="" loading="lazy"></span>
                     <span class="qsp-label">셀프 공유창고</span>
@@ -245,7 +262,7 @@
             </div>
             <img src="images/additional-service-banner.png" alt="박스풀에서 즐기는 특별한 공간" loading="lazy">
         </div>
-        <a href="#" class="sc-viewall">
+        <a href="#" class="sc-viewall" hidden>
             <span>부가 서비스 바로가기</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
@@ -312,7 +329,7 @@
     </div>
 </section>
 
-<!-- ==================== SCENARIOS (Persona tabs) ==================== -->
+<!-- ==================== SCENARIOS (Use case grid) ==================== -->
 <section class="scenarios section-pad" id="scenarios">
     <div class="container-narrow">
         <div class="section-head">
@@ -320,54 +337,58 @@
             <h2 class="section-title">이렇게 쓰고 있어요</h2>
         </div>
 
-        <div class="stabs">
-            <button class="stab active" data-persona="hobby">취미공간이 필요한 나</button>
-            <button class="stab" data-persona="startup">1인 창업·사이드잡</button>
-            <button class="stab" data-persona="moving">이사철 짐 정리</button>
-            <button class="stab" data-persona="franchise">가맹 창업 고민</button>
-        </div>
-
-        <div class="spanels">
-            <div class="spanel active" data-persona="hobby">
-                <div class="spanel-situation">
-                    <span class="spanel-tag">상황</span>
-                    <p>"본가에서 나와 자취를 시작했는데, 프라모델이랑 게임 콘솔 둘 곳이 없어요."</p>
+        <div class="uc-stage">
+            <div class="uc-slides">
+                <div class="uc-slide active">
+                    <div class="uc-ico"><img src="images/qs-self-storage.svg" alt="" loading="lazy"></div>
+                    <p class="uc-situation">자취하며 늘어난 계절옷·취미용품을 둘 곳이 없을 때</p>
+                    <span class="uc-svc">셀프 공유창고</span>
                 </div>
-                <ul class="spanel-services">
-                    <li><span>📦</span>셀프 공유창고 — 계절옷·취미용품 보관</li>
-                    <li><span>🤖</span>건프라 공방 — 작업 공간 대여</li>
-                    <li><span>🎮</span>게임룸 — 친구들과 여가 시간</li>
-                </ul>
+                <div class="uc-slide">
+                    <div class="uc-ico"><img src="images/qs-self-storage.svg" alt="" loading="lazy"></div>
+                    <p class="uc-situation">시즌이 지난 캠핑·스키 장비를 통째로 넣어두고 싶을 때</p>
+                    <span class="uc-svc">셀프 공유창고</span>
+                </div>
+                <div class="uc-slide">
+                    <div class="uc-ico"><img src="images/qs-delivery-storage.svg" alt="" loading="lazy"></div>
+                    <p class="uc-situation">이사 잔금 전, 2주만 짐을 맡겨두고 싶을 때</p>
+                    <span class="uc-svc">배송형 공유창고</span>
+                </div>
+                <div class="uc-slide">
+                    <div class="uc-ico"><img src="images/qs-delivery-storage.svg" alt="" loading="lazy"></div>
+                    <p class="uc-situation">해외 출장·유학으로 몇 달간 집을 비울 때</p>
+                    <span class="uc-svc">배송형 공유창고</span>
+                </div>
+                <div class="uc-slide">
+                    <div class="uc-ico"><img src="images/qs-mall-storage.svg" alt="" loading="lazy"></div>
+                    <p class="uc-situation">온라인 셀러가 재고 보관부터 택배 포장까지 한 곳에서 해결하고 싶을 때</p>
+                    <span class="uc-svc">쇼핑몰 공유창고</span>
+                </div>
+                <div class="uc-slide">
+                    <div class="uc-ico"><img src="images/qs-gunpla.svg" alt="" loading="lazy"></div>
+                    <p class="uc-situation">집에서 하기 힘든 건프라 도색을 냄새 걱정 없이 하고 싶을 때</p>
+                    <span class="uc-svc">건프라 공방</span>
+                </div>
+                <div class="uc-slide">
+                    <div class="uc-ico"><img src="images/qs-psroom.svg" alt="" loading="lazy"></div>
+                    <p class="uc-situation">친구들과 보드게임·PS를 즐기고 싶은데 집이 좁을 때</p>
+                    <span class="uc-svc">게임룸</span>
+                </div>
+                <div class="uc-slide">
+                    <div class="uc-ico"><img src="images/qs-boardgame.svg" alt="" loading="lazy"></div>
+                    <p class="uc-situation">친구들과 즐길 보드게임을 잔뜩 사뒀는데 집에 둘 곳이 없을 때</p>
+                    <span class="uc-svc">보드게임룸</span>
+                </div>
             </div>
-            <div class="spanel" data-persona="startup">
-                <div class="spanel-situation">
-                    <span class="spanel-tag">상황</span>
-                    <p>"퇴근 후 부업으로 소품샵을 운영하는데, 재고 둘 곳도 일할 공간도 필요해요."</p>
-                </div>
-                <ul class="spanel-services">
-                    <li><span>🚚</span>배송형 공유창고 — 재고 픽업·보관</li>
-                    <li><span>🧑‍💻</span>스마트 오피스 — 포장·업무 공간</li>
-                </ul>
-            </div>
-            <div class="spanel" data-persona="moving">
-                <div class="spanel-situation">
-                    <span class="spanel-tag">상황</span>
-                    <p>"이사 날짜는 다가오는데 짐 둘 곳이 마땅치 않아요."</p>
-                </div>
-                <ul class="spanel-services">
-                    <li><span>📦</span>셀프 공유창고 — 자주 쓰는 짐</li>
-                    <li><span>🚚</span>배송형 공유창고 — 당장 안 쓰는 짐</li>
-                </ul>
-            </div>
-            <div class="spanel" data-persona="franchise">
-                <div class="spanel-situation">
-                    <span class="spanel-tag">상황</span>
-                    <p>"무인 창고 창업을 알아보고 있는데, 어디서부터 시작해야 할지 모르겠어요."</p>
-                </div>
-                <ul class="spanel-services">
-                    <li><span>🤝</span>프랜차이즈 창업 상담</li>
-                    <li><span>📦</span>운영 중인 지점 벤치마킹</li>
-                </ul>
+            <div class="uc-dots">
+                <button type="button" class="uc-dot active" aria-label="1번 예시"></button>
+                <button type="button" class="uc-dot" aria-label="2번 예시"></button>
+                <button type="button" class="uc-dot" aria-label="3번 예시"></button>
+                <button type="button" class="uc-dot" aria-label="4번 예시"></button>
+                <button type="button" class="uc-dot" aria-label="5번 예시"></button>
+                <button type="button" class="uc-dot" aria-label="6번 예시"></button>
+                <button type="button" class="uc-dot" aria-label="7번 예시"></button>
+                <button type="button" class="uc-dot" aria-label="8번 예시"></button>
             </div>
         </div>
     </div>
