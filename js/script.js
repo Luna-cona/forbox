@@ -615,33 +615,144 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* =============================================
-       SCENARIOS — Use case rotating stage
+       SCENARIOS — 서비스별 선택 + 상황 문구 자동 순환
        ============================================= */
     const ucStage = document.querySelector('.uc-stage');
 
     if (ucStage) {
-        const ucSlides = Array.from(ucStage.querySelectorAll('.uc-slide'));
-        const ucDots = Array.from(ucStage.querySelectorAll('.uc-dot'));
+        const ucPanels = Array.from(ucStage.querySelectorAll('.uc-panel'));
+        const ucNavBtns = Array.from(ucStage.querySelectorAll('.uc-navbtn'));
         const ucReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const UC_DELAY = 4000;
-        let ucIdx = 0;
-        let ucTimer = null;
+        let ucSitTimer = null;
+        let ucActiveIdx = 0;
 
-        const ucGo = i => {
-            ucIdx = (i + ucSlides.length) % ucSlides.length;
-            ucSlides.forEach((s, n) => s.classList.toggle('active', n === ucIdx));
-            ucDots.forEach((d, n) => d.classList.toggle('active', n === ucIdx));
-        };
-        const ucStop = () => { if (ucTimer) { clearInterval(ucTimer); ucTimer = null; } };
-        const ucStart = () => {
-            ucStop();
-            if (!ucReduce) ucTimer = setInterval(() => ucGo(ucIdx + 1), UC_DELAY);
+        const ucStopSit = () => { if (ucSitTimer) { clearInterval(ucSitTimer); ucSitTimer = null; } };
+
+        const ucRotateSit = panel => {
+            ucStopSit();
+            const sits = Array.from(panel.querySelectorAll('.uc-situation'));
+            let i = 0;
+            sits.forEach((s, n) => s.classList.toggle('active', n === 0));
+            if (sits.length > 1 && !ucReduce) {
+                ucSitTimer = setInterval(() => {
+                    i = (i + 1) % sits.length;
+                    sits.forEach((s, n) => s.classList.toggle('active', n === i));
+                }, UC_DELAY);
+            }
         };
 
-        ucDots.forEach((d, n) => d.addEventListener('click', () => { ucGo(n); ucStart(); }));
-        ucStage.addEventListener('mouseenter', ucStop);
-        ucStage.addEventListener('mouseleave', ucStart);
-        ucStart();
+        const ucSelect = idx => {
+            ucActiveIdx = idx;
+            ucPanels.forEach((p, n) => p.classList.toggle('active', n === idx));
+            ucNavBtns.forEach((b, n) => b.classList.toggle('active', n === idx));
+            ucRotateSit(ucPanels[idx]);
+        };
+
+        ucNavBtns.forEach((b, n) => b.addEventListener('click', () => ucSelect(n)));
+        ucStage.addEventListener('mouseenter', ucStopSit);
+        ucStage.addEventListener('mouseleave', () => ucRotateSit(ucPanels[ucActiveIdx]));
+        ucSelect(0);
+
+        /* 모바일: nav 4/3 페이지 스와이프 + 도트 동기화 */
+        const ucNav = document.getElementById('ucNav');
+        const ucNavDots = Array.from(document.querySelectorAll('#ucNavDots .uc-navdot'));
+        if (ucNav && ucNavDots.length) {
+            const ucNavSync = () => {
+                const w = ucNav.clientWidth || 1;
+                const p = Math.round(ucNav.scrollLeft / w);
+                ucNavDots.forEach((d, n) => d.classList.toggle('active', n === p));
+            };
+            ucNav.addEventListener('scroll', ucNavSync, { passive: true });
+            ucNavDots.forEach((d, n) => d.addEventListener('click', () => {
+                ucNav.scrollTo({ left: n * ucNav.clientWidth, behavior: 'smooth' });
+            }));
+        }
+    }
+
+    /* =============================================
+       SECURITY — 3개씩 슬라이드 자동 순환
+       ============================================= */
+    const secStage = document.getElementById('secStage');
+
+    if (secStage) {
+        const secSlides = Array.from(secStage.querySelectorAll('.sec-slide'));
+        const secDots = Array.from(secStage.querySelectorAll('.security-dot'));
+        const secReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const SEC_DELAY = 3800;
+        let secIdx = 0;
+        let secTimer = null;
+
+        const secGo = i => {
+            secIdx = (i + secSlides.length) % secSlides.length;
+            secSlides.forEach((s, n) => s.classList.toggle('active', n === secIdx));
+            secDots.forEach((d, n) => d.classList.toggle('active', n === secIdx));
+        };
+        const secStop = () => { if (secTimer) { clearInterval(secTimer); secTimer = null; } };
+        const secStart = () => {
+            secStop();
+            if (!secReduce) secTimer = setInterval(() => secGo(secIdx + 1), SEC_DELAY);
+        };
+
+        secDots.forEach((d, n) => d.addEventListener('click', () => { secGo(n); secStart(); }));
+        secStage.addEventListener('mouseenter', secStop);
+        secStage.addEventListener('mouseleave', secStart);
+        secStart();
+    }
+
+    /* =============================================
+       ENTERPRISE — 배너 안 사진/문구 자동 페이드 (프랜차이즈 + 풀필먼트)
+       ============================================= */
+    const entReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    document.querySelectorAll('.ent-rotator').forEach(rotator => {
+        const slides = Array.from(rotator.querySelectorAll('.ent-slide'));
+        if (slides.length < 2) return;
+        const banner = rotator.closest('.enterprise-banner');
+        const dots = banner ? Array.from(banner.querySelectorAll('.ent-dots .ent-dot')) : [];
+        const DELAY = 3200;
+        let idx = 0;
+        let timer = null;
+
+        const go = i => {
+            idx = (i + slides.length) % slides.length;
+            slides.forEach((s, n) => s.classList.toggle('active', n === idx));
+            dots.forEach((d, n) => d.classList.toggle('active', n === idx));
+        };
+        const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+        const start = () => { stop(); if (!entReduce) timer = setInterval(() => go(idx + 1), DELAY); };
+
+        dots.forEach((d, n) => d.addEventListener('click', () => { go(n); start(); }));
+        rotator.addEventListener('mouseenter', stop);
+        rotator.addEventListener('mouseleave', start);
+        start();
+    });
+
+    /* =============================================
+       맨 위로 가기 버튼
+       ============================================= */
+    const toTop = document.getElementById('toTop');
+    if (toTop) {
+        const toggleToTop = () => toTop.classList.toggle('show', window.scrollY > 400);
+        window.addEventListener('scroll', toggleToTop, { passive: true });
+        toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        toggleToTop();
+    }
+
+    /* =============================================
+       스크롤 진입 시 살짝 떠오르며 등장 (주요 섹션 공통)
+       ============================================= */
+    if ('IntersectionObserver' in window
+        && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const revealEls = document.querySelectorAll('.enterprise-banner, .security-stage, .uc-stage, .newsletter');
+        if (revealEls.length) {
+            const revealObs = new IntersectionObserver((entries, obs) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) { e.target.classList.add('in-view'); obs.unobserve(e.target); }
+                });
+            }, { threshold: 0.12 });
+            revealEls.forEach(el => { el.classList.add('reveal'); revealObs.observe(el); });
+        }
     }
 
     /* =============================================

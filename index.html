@@ -173,6 +173,10 @@
                 <span class="qs-util-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 13v-2a8 8 0 0 1 16 0v2"/><path d="M4 14a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2z"/><path d="M20 14a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2 2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2z"/><path d="M12 20h3"/></svg></span>
                 <span class="qs-util-label">실시간<br>상담하기</span>
             </a>
+            <a href="https://www.boxful.kr/our-service/" target="_blank" rel="noopener" class="qs-util-btn qs-util-more">
+                <span class="qs-util-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h11M8 12h11M8 18h11"/><circle cx="3.8" cy="6" r="1.1"/><circle cx="3.8" cy="12" r="1.1"/><circle cx="3.8" cy="18" r="1.1"/></svg></span>
+                <span class="qs-util-label">서비스<br>이용방법</span>
+            </a>
         </div>
     </div>
 </section>
@@ -339,56 +343,95 @@
 
         <div class="uc-stage">
             <div class="uc-slides">
-                <div class="uc-slide active">
+                <div class="uc-panel active" data-service="self">
                     <div class="uc-ico"><img src="images/qs-self-storage.svg" alt="" loading="lazy"></div>
-                    <p class="uc-situation">자취하며 늘어난 계절옷·취미용품을 둘 곳이 없을 때</p>
                     <span class="uc-svc">셀프 공유창고</span>
+                    <ul class="uc-tags"><li>면적 단위</li><li>무인 24시간 출입</li><li>수시 방문 보관</li></ul>
+                    <div class="uc-situations">
+                        <p class="uc-situation active">자취하며 늘어난 계절옷·취미용품을 둘 곳이 없을 때</p>
+                        <p class="uc-situation">시즌이 지난 캠핑·스키 장비를 통째로 넣어두고 싶을 때</p>
+                        <p class="uc-situation">사무실을 옮기며 당장 안 쓰는 집기·서류를 보관해야 할 때</p>
+                        <p class="uc-situation">추억이 담긴 물건은 못 버리겠고, 집은 넓게 쓰고 싶을 때</p>
+                    </div>
                 </div>
-                <div class="uc-slide">
-                    <div class="uc-ico"><img src="images/qs-self-storage.svg" alt="" loading="lazy"></div>
-                    <p class="uc-situation">시즌이 지난 캠핑·스키 장비를 통째로 넣어두고 싶을 때</p>
-                    <span class="uc-svc">셀프 공유창고</span>
-                </div>
-                <div class="uc-slide">
+                <div class="uc-panel" data-service="delivery">
                     <div class="uc-ico"><img src="images/qs-delivery-storage.svg" alt="" loading="lazy"></div>
-                    <p class="uc-situation">이사 잔금 전, 2주만 짐을 맡겨두고 싶을 때</p>
                     <span class="uc-svc">배송형 공유창고</span>
+                    <ul class="uc-tags"><li>빈 박스 배송</li><li>문 앞 수거·재배송</li><li>박스 단위</li></ul>
+                    <div class="uc-situations">
+                        <p class="uc-situation active">창고에 갈 시간이 없어, 빈 박스에 채워 문 앞에 내놓기만 하면 맡길 수 있으면 할 때</p>
+                        <p class="uc-situation">맡겨 둔 박스를 필요한 날 다시 집까지 받고 싶을 때</p>
+                        <p class="uc-situation">무거운 짐을 직접 들고 옮길 자신이 없을 때</p>
+                        <p class="uc-situation">원룸이 좁아 안 쓰는 짐만 밖으로 빼놓고 싶을 때</p>
+                    </div>
                 </div>
-                <div class="uc-slide">
-                    <div class="uc-ico"><img src="images/qs-delivery-storage.svg" alt="" loading="lazy"></div>
-                    <p class="uc-situation">해외 출장·유학으로 몇 달간 집을 비울 때</p>
-                    <span class="uc-svc">배송형 공유창고</span>
-                </div>
-                <div class="uc-slide">
+                <div class="uc-panel" data-service="mall">
                     <div class="uc-ico"><img src="images/qs-mall-storage.svg" alt="" loading="lazy"></div>
-                    <p class="uc-situation">온라인 셀러가 재고 보관부터 택배 포장까지 한 곳에서 해결하고 싶을 때</p>
                     <span class="uc-svc">쇼핑몰 공유창고</span>
+                    <ul class="uc-tags"><li>재고 보관</li><li>피킹·포장</li><li>택배 발송</li></ul>
+                    <div class="uc-situations">
+                        <p class="uc-situation active">온라인 셀러가 재고 보관부터 택배 포장까지 한 곳에서 해결하고 싶을 때</p>
+                        <p class="uc-situation">주문이 몰리는 시즌에 포장·발송 손이 부족할 때</p>
+                        <p class="uc-situation">집에서 하던 택배 작업을 이제 따로 떼어 놓고 싶을 때</p>
+                    </div>
                 </div>
-                <div class="uc-slide">
+                <div class="uc-panel" data-service="consignment">
+                    <div class="uc-ico"><img src="images/qs-consignment.svg" alt="" loading="lazy"></div>
+                    <span class="uc-svc">위탁판매함</span>
+                    <ul class="uc-tags"><li>전용 전시함</li><li>위탁 판매</li><li>정산 관리</li></ul>
+                    <div class="uc-situations">
+                        <p class="uc-situation active">안 쓰지만 버리긴 아까운 소장품을 전시하며 팔고 싶을 때</p>
+                        <p class="uc-situation">중고 거래는 번거롭고, 맡겨두고 팔리기만 기다리고 싶을 때</p>
+                        <p class="uc-situation">피규어·굿즈 컬렉션을 정리하면서 일부는 판매하고 싶을 때</p>
+                    </div>
+                </div>
+                <div class="uc-panel" data-service="gunpla">
                     <div class="uc-ico"><img src="images/qs-gunpla.svg" alt="" loading="lazy"></div>
-                    <p class="uc-situation">집에서 하기 힘든 건프라 도색을 냄새 걱정 없이 하고 싶을 때</p>
                     <span class="uc-svc">건프라 공방</span>
+                    <ul class="uc-tags"><li>도색 부스</li><li>공구 구비</li><li>시간 단위 대여</li></ul>
+                    <div class="uc-situations">
+                        <p class="uc-situation active">집에서 하기 힘든 건프라 도색을 냄새 걱정 없이 하고 싶을 때</p>
+                        <p class="uc-situation">에어브러시·컴프레서까지 갖춰 제대로 작업하고 싶을 때</p>
+                        <p class="uc-situation">도색 부스가 없어 스프레이 작업을 계속 미뤄왔을 때</p>
+                    </div>
                 </div>
-                <div class="uc-slide">
+                <div class="uc-panel" data-service="psroom">
                     <div class="uc-ico"><img src="images/qs-psroom.svg" alt="" loading="lazy"></div>
-                    <p class="uc-situation">친구들과 보드게임·PS를 즐기고 싶은데 집이 좁을 때</p>
                     <span class="uc-svc">게임룸</span>
+                    <ul class="uc-tags"><li>PS·콘솔 구비</li><li>프라이빗 룸</li><li>시간 단위</li></ul>
+                    <div class="uc-situations">
+                        <p class="uc-situation active">친구들과 PS·콘솔 게임을 즐기고 싶은데 집이 좁을 때</p>
+                        <p class="uc-situation">최신 콘솔을 사기는 부담스럽고 가끔만 즐기고 싶을 때</p>
+                        <p class="uc-situation">눈치 안 보고 밤늦게까지 게임에 집중하고 싶을 때</p>
+                    </div>
                 </div>
-                <div class="uc-slide">
+                <div class="uc-panel" data-service="boardgame">
                     <div class="uc-ico"><img src="images/qs-boardgame.svg" alt="" loading="lazy"></div>
-                    <p class="uc-situation">친구들과 즐길 보드게임을 잔뜩 사뒀는데 집에 둘 곳이 없을 때</p>
                     <span class="uc-svc">보드게임룸</span>
+                    <ul class="uc-tags"><li>보드게임 구비</li><li>단체 이용</li><li>시간 단위</li></ul>
+                    <div class="uc-situations">
+                        <p class="uc-situation active">여러 명이 모여 편하게 보드게임 할 공간이 필요할 때</p>
+                        <p class="uc-situation">다양한 보드게임을 직접 사지 않고 골라 즐기고 싶을 때</p>
+                        <p class="uc-situation">모임·동호회 정기 게임 데이 장소가 마땅치 않을 때</p>
+                    </div>
                 </div>
             </div>
-            <div class="uc-dots">
-                <button type="button" class="uc-dot active" aria-label="1번 예시"></button>
-                <button type="button" class="uc-dot" aria-label="2번 예시"></button>
-                <button type="button" class="uc-dot" aria-label="3번 예시"></button>
-                <button type="button" class="uc-dot" aria-label="4번 예시"></button>
-                <button type="button" class="uc-dot" aria-label="5번 예시"></button>
-                <button type="button" class="uc-dot" aria-label="6번 예시"></button>
-                <button type="button" class="uc-dot" aria-label="7번 예시"></button>
-                <button type="button" class="uc-dot" aria-label="8번 예시"></button>
+            <div class="uc-nav" id="ucNav">
+                <div class="uc-navpage">
+                    <button type="button" class="uc-navbtn active" data-service="self" aria-label="셀프 공유창고"><img src="images/qs-self-storage.svg" alt="" loading="lazy"></button>
+                    <button type="button" class="uc-navbtn" data-service="delivery" aria-label="배송형 공유창고"><img src="images/qs-delivery-storage.svg" alt="" loading="lazy"></button>
+                    <button type="button" class="uc-navbtn" data-service="mall" aria-label="쇼핑몰 공유창고"><img src="images/qs-mall-storage.svg" alt="" loading="lazy"></button>
+                    <button type="button" class="uc-navbtn" data-service="consignment" aria-label="위탁판매함"><img src="images/qs-consignment.svg" alt="" loading="lazy"></button>
+                </div>
+                <div class="uc-navpage">
+                    <button type="button" class="uc-navbtn" data-service="gunpla" aria-label="건프라 공방"><img src="images/qs-gunpla.svg" alt="" loading="lazy"></button>
+                    <button type="button" class="uc-navbtn" data-service="psroom" aria-label="게임룸"><img src="images/qs-psroom.svg" alt="" loading="lazy"></button>
+                    <button type="button" class="uc-navbtn" data-service="boardgame" aria-label="보드게임룸"><img src="images/qs-boardgame.svg" alt="" loading="lazy"></button>
+                </div>
+            </div>
+            <div class="uc-navdots" id="ucNavDots">
+                <button type="button" class="uc-navdot active" aria-label="1"></button>
+                <button type="button" class="uc-navdot" aria-label="2"></button>
             </div>
         </div>
     </div>
@@ -402,22 +445,40 @@
                 <h2>안심 공유창고, 박스풀이 약속합니다</h2>
                 <p>박스풀은 고객님의 소중한 물건을 가장 안전하게 보관하기 위해 최첨단 보안 시스템과 쾌적한 환경을 제공합니다. 전국 어디서나 믿고 이용할 수 있는 1등 브랜드입니다.</p>
             </div>
-            <div class="security-cards">
-                <div class="security-card">
-                    <div class="security-title-row"><div class="security-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg></div><h4>24시간 보안</h4></div>
-                    <p>ADT 캡스 보안 시스템과 CCTV로 소중한 물품을 철저하게 관리합니다.</p>
+            <div class="security-stage" id="secStage">
+                <div class="security-cards">
+                    <div class="sec-slide active">
+                        <div class="security-card sec-c1">
+                            <div class="security-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+                            <h4>안심 공유창고</h4>
+                        </div>
+                        <div class="security-card sec-c2">
+                            <div class="security-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a2 2 0 0 0-4 0v9.76a4 4 0 1 0 4 0z"/><path d="M12 9v6"/></svg></div>
+                            <h4>항온항습 환경</h4>
+                        </div>
+                        <div class="security-card sec-c3">
+                            <div class="security-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s5 4.5 5 9a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5.3 1.3 1.3 2.2 2.5 2.2 0-2.3-.5-4.7-1.5-6.7z"/></svg></div>
+                            <h4>화재방지</h4>
+                        </div>
+                    </div>
+                    <div class="sec-slide">
+                        <div class="security-card sec-c4">
+                            <div class="security-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 17V8h3.5a2.5 2.5 0 0 1 0 5H9"/></svg></div>
+                            <h4>전용 주차시설</h4>
+                        </div>
+                        <div class="security-card sec-c5">
+                            <div class="security-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><circle cx="12" cy="15.5" r="1.4"/><path d="M12 16.9V18"/></svg></div>
+                            <h4>비밀번호 설정</h4>
+                        </div>
+                        <div class="security-card sec-c6">
+                            <div class="security-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 1 9 9H3a9 9 0 0 1 9-9z"/><path d="M12 12v6a2 2 0 0 0 4 0"/></svg></div>
+                            <h4>보험 가입가능</h4>
+                        </div>
+                    </div>
                 </div>
-                <div class="security-card">
-                    <div class="security-title-row"><div class="security-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 14a2 2 0 104 0V5a2 2 0 10-4 0z"/><path d="M8 11h8"/></svg></div><h4>항온항습</h4></div>
-                    <p>최적의 온도와 습도를 일정하게 유지하여 최상의 보관 환경을 보장합니다.</p>
-                </div>
-                <div class="security-card">
-                    <div class="security-title-row"><div class="security-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h4>보험 가입</h4></div>
-                    <p>화재 및 도난 보험 가입으로 만일의 사태에도 안심하고 맡기실 수 있습니다.</p>
-                </div>
-                <div class="security-card">
-                    <div class="security-title-row"><div class="security-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg></div><h4>스마트 출입</h4></div>
-                    <p>앱을 통한 간편한 스마트키 발급으로 365일 언제든 자유롭게 출입 가능합니다.</p>
+                <div class="security-dots">
+                    <button type="button" class="security-dot active" aria-label="1"></button>
+                    <button type="button" class="security-dot" aria-label="2"></button>
                 </div>
             </div>
         </div>
@@ -432,40 +493,140 @@
             <p>무인 운영 시스템으로 인건비 걱정 없이, 안정적인 수익을 창출하세요. 박스풀만의 데이터 기반 상권 분석과 운영 노하우를 공유합니다.</p>
         </div>
         <div class="enterprise-row">
-            <div class="enterprise-banner" id="franchise">
+            <div class="enterprise-banner has-slider" id="franchise">
                 <div>
-                    <h4>프랜차이즈 창업</h4>
-                    <p>무인 공유창고 창업, 박스풀과 함께 시작하세요.</p>
+                    <div class="eb-head-row">
+                        <h4>박스풀 프랜차이즈</h4>
+                        <a href="https://www.boxful.kr/franchise/?lang=ko" target="_blank" rel="noopener" class="eb-detail-link">
+                            자세히 보기
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+                        </a>
+                    </div>
+                    <p class="eb-tagline">아시아에서 가장 큰 무인 공유창고</p>
                 </div>
-                <a href="#" class="btn btn-outline">가맹 문의</a>
+                <div class="ent-rotator" id="entRotator">
+                    <a class="ent-slide active" href="https://www.boxful.kr/franchise/?lang=ko" target="_blank" rel="noopener">
+                        <span class="ent-slide-img"><img src="https://www.boxful.kr/images/main/franchise2.png" alt="24시간 무인" loading="lazy"><span class="ent-slide-hint">자세히 보기 →</span></span>
+                        <span class="ent-slide-title">24시간 무인</span>
+                        <span class="ent-slide-sub">100% 무인 프랜차이즈로 인건비 부담 제로</span>
+                    </a>
+                    <a class="ent-slide" href="https://www.boxful.kr/franchise/?lang=ko" target="_blank" rel="noopener">
+                        <span class="ent-slide-img"><img src="https://www.boxful.kr/images/main/franchise3.png" alt="점주님들의 추천" loading="lazy"><span class="ent-slide-hint">자세히 보기 →</span></span>
+                        <span class="ent-slide-title">점주님들의 추천</span>
+                        <span class="ent-slide-sub">실제 점주님들의 생생한 인터뷰를 확인해보세요</span>
+                    </a>
+                    <a class="ent-slide" href="https://www.boxful.kr/franchise/?lang=ko" target="_blank" rel="noopener">
+                        <span class="ent-slide-img"><img src="https://www.boxful.kr/images/main/franchise1.png" alt="본사의 가맹점 관리" loading="lazy"><span class="ent-slide-hint">자세히 보기 →</span></span>
+                        <span class="ent-slide-title">본사의 가맹점 관리</span>
+                        <span class="ent-slide-sub">전문 CS상담원 및 홍보팀을 지원합니다</span>
+                    </a>
+                </div>
+                <div class="ent-dots" id="entDots">
+                    <button type="button" class="ent-dot active" aria-label="1번 슬라이드"></button>
+                    <button type="button" class="ent-dot" aria-label="2번 슬라이드"></button>
+                    <button type="button" class="ent-dot" aria-label="3번 슬라이드"></button>
+                </div>
+                <a href="https://www.boxful.kr/franchise/contact/" target="_blank" rel="noopener" class="btn btn-outline">박스풀 프랜차이즈 상담신청 ›</a>
             </div>
-            <div class="enterprise-banner dark" id="enterprise">
+            <div class="enterprise-banner dark has-slider" id="enterprise">
                 <div>
-                    <h4>기업 풀필먼트 <span class="badge-b2b">기업전용</span></h4>
-                    <p>물류·재고·배송까지, 기업 맞춤 풀필먼트 솔루션. 담당자가 직접 상담해드립니다.</p>
+                    <div class="eb-head-row">
+                        <h4>기업 풀필먼트 <span class="badge-b2b">기업전용</span></h4>
+                        <a href="https://fulfillment.boxful.kr/ko#contact" target="_blank" rel="noopener" class="eb-detail-link">
+                            자세히 보기
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+                        </a>
+                    </div>
+                    <p class="eb-tagline">물류·재고·배송까지, 기업 맞춤 풀필먼트 솔루션</p>
                 </div>
-                <a href="#" class="btn btn-teal">상담 신청</a>
+                <div class="ent-rotator" id="entRotator2">
+                    <a class="ent-slide active" href="https://fulfillment.boxful.kr/ko#contact" target="_blank" rel="noopener">
+                        <span class="ent-slide-img is-blank"><span class="ent-slide-hint">자세히 보기 →</span></span>
+                        <span class="ent-slide-title">통합 물류 관리</span>
+                        <span class="ent-slide-sub">입고·보관·피킹·출고를 한 시스템에서</span>
+                    </a>
+                    <a class="ent-slide" href="https://fulfillment.boxful.kr/ko#contact" target="_blank" rel="noopener">
+                        <span class="ent-slide-img is-blank"><span class="ent-slide-hint">자세히 보기 →</span></span>
+                        <span class="ent-slide-title">실시간 재고 확인</span>
+                        <span class="ent-slide-sub">재고 현황을 언제든 대시보드에서 조회</span>
+                    </a>
+                    <a class="ent-slide" href="https://fulfillment.boxful.kr/ko#contact" target="_blank" rel="noopener">
+                        <span class="ent-slide-img is-blank"><span class="ent-slide-hint">자세히 보기 →</span></span>
+                        <span class="ent-slide-title">전담 매니저 배정</span>
+                        <span class="ent-slide-sub">물류 전 과정을 1:1로 지원</span>
+                    </a>
+                </div>
+                <div class="ent-dots">
+                    <button type="button" class="ent-dot active" aria-label="1번 슬라이드"></button>
+                    <button type="button" class="ent-dot" aria-label="2번 슬라이드"></button>
+                    <button type="button" class="ent-dot" aria-label="3번 슬라이드"></button>
+                </div>
+                <a href="https://fulfillment.boxful.kr/ko#contact" target="_blank" rel="noopener" class="btn btn-outline">기업 풀필먼트 상담신청 ›</a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ==================== TRUST ==================== -->
-<section class="trust section-pad">
-    <div class="container trust-inner">
-        <div class="trust-stat"><strong>50+</strong><span>운영 지점</span></div>
-        <div class="trust-stat"><strong>10,000+</strong><span>누적 이용자</span></div>
-        <div class="trust-stat"><strong>4.8</strong><span>평균 만족도</span></div>
-        <a href="#" class="btn btn-teal">지금 바로 상담하기</a>
+<!-- ==================== NEWSLETTER ==================== -->
+<section class="trust">
+    <div class="container-narrow">
+    <div class="newsletter">
+        <div class="newsletter-inner">
+            <h2>뉴스레터</h2>
+            <p>박스풀의 다양한 물류 소식이 궁금하신가요?</p>
+            <form class="newsletter-form" onsubmit="return false">
+                <input type="email" placeholder="E-mail" autocomplete="email" required>
+                <button type="submit">구독</button>
+            </form>
+            <label class="newsletter-consent">
+                <input type="checkbox" required>
+                <span>개인정보 수집 및 이용에 동의합니다.</span>
+            </label>
+        </div>
+    </div>
     </div>
 </section>
 
 <!-- ==================== FOOTER ==================== -->
 <footer class="footer">
-    <div class="container footer-inner">
-        <p class="footer-biz">주식회사 박스풀 | 대표: 000 | 사업자등록번호: 000-00-00000<br>고객센터 02-561-4999 · 평일 10:00~18:00 (점심 12:00~13:00)<br>© 2026 Boxful. All rights reserved.</p>
+    <div class="container-narrow">
+        <nav class="footer-nav">
+            <a href="#">회사소개</a>
+            <a href="#">자주묻는질문</a>
+            <a href="#">블로그</a>
+            <a href="#">개인정보처리방침</a>
+            <a href="#">3PL</a>
+            <a href="#">이용약관</a>
+            <a href="#" class="footer-nav-right">로그아웃</a>
+        </nav>
+        <div class="footer-body">
+            <div class="footer-col">
+                <h4>고객센터</h4>
+                <div class="footer-contact-grid">
+                    <div class="footer-field"><span>전화 상담</span><a href="tel:02-561-4999">02-561-4999</a></div>
+                    <div class="footer-field"><span>카카오톡 상담</span><a href="#">@박스풀</a></div>
+                    <div class="footer-field"><span>이메일 상담</span><a href="mailto:support@boxful.kr">support@boxful.kr</a></div>
+                </div>
+                <p class="footer-hours">상담시간 : 10:00 - 18:00 (주말 및 공휴일 휴무)<br>점심시간 : 13:00 - 14:00</p>
+            </div>
+            <div class="footer-col">
+                <h4>주식회사 공유창고</h4>
+                <p class="footer-biz">대표 : 성정학<br>주소 : 경기도 광주시 순암로 425-9, 에이동<br>사업자 등록번호 : 776-87-02542<br>통신판매업 신고번호 : 제2022-경기광주-1834호</p>
+                <p class="footer-copy">Copyright 2025. BOXFUL all rights reserved.</p>
+            </div>
+            <div class="footer-social">
+                <a href="#" aria-label="채널톡"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-3-.5L4 21l1.3-4.4A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 12.5 3 8.5 8.5 0 0 1 21 11.5z"/></svg></a>
+                <a href="#" aria-label="인스타그램"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+                <a href="#" aria-label="네이버 블로그" class="footer-social-text">blog</a>
+                <a href="#" aria-label="티스토리" class="footer-social-text">T</a>
+            </div>
+        </div>
     </div>
 </footer>
+
+<button type="button" class="to-top" id="toTop" aria-label="맨 위로">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+</button>
 
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="js/script.js"></script>
